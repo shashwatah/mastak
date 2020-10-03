@@ -1,3 +1,3 @@
-# cache-monger
+# silo
 
-A cache module for 3rd party APIs.
+An in-memory cache module.
