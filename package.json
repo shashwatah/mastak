@@ -1,0 +1,19 @@
+{
+  "name": "silo",
+  "version": "1.0.0",
+  "description": "An in-memory cache module for Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Araekiel/silo.git"
+  },
+  "author": "Araekiel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Araekiel/silo/issues"
+  },
+  "homepage": "https://github.com/Araekiel/silo#readme"
+}
