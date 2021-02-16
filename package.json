@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Araekiel/silo#readme",
   "dependencies": {
+    "@types/node-fetch": "^2.5.8",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
