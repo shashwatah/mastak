@@ -5,8 +5,7 @@ interface CacheData {
         url: string,
         params: any,
         headers: string,
-        updateInterval: number,
-        dataPro: any
+        updateInterval: number
     },
     data: any
 };

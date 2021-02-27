@@ -1,3 +1,3 @@
 # mastak
 
-An in-memory cache module.
+An npm module for in-memory automated API caching.
