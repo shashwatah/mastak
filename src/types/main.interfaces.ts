@@ -9,11 +9,12 @@ export interface CachedAPI {
     request: {
         url: string,
         method: string,
-        params?: {
+        body?: {
             [key: string]: string
         },
-        body?: string,
-        headers?: string,
+        headers?: {
+            [key: string]: string
+        },
         autoUpdate: boolean,
         updateInterval?: number,
         dataProcessor?: any
