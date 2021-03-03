@@ -1,17 +1,9 @@
 import fetch from "node-fetch";
 
-interface CacheData {
-    requestData: {
-        url: string,
-        params: any,
-        headers: string,
-        updateInterval: number
-    },
-    data: any
-};
+import { CachedAPI } from "./types/main.interfaces";
 
-export default class Silo {
-    private cache: Array<CacheData>;
+export default class Mastak {
+    private cache: Array<CachedAPI>;
 
     constructor() {
         this.cache = [];
