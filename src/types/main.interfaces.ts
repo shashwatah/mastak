@@ -19,9 +19,9 @@ export interface CachedAPI {
         headers?: {
             [key: string]: string
         },
-        autoUpdate: boolean,
-        updateInterval?: number,
-        dataProcessor?: any
     },
+    autoUpdate: boolean,
+    updateInterval?: number,
+    dataProcessor?: any
     data?: any
 };
