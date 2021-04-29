@@ -5,6 +5,10 @@ enum requestMethod {
     DELETE
 };
 
+export interface Cache {
+    [key: string]: CachedAPI
+}
+
 export interface CachedAPI {
     request: {
         url: string,

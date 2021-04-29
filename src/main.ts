@@ -1,12 +1,12 @@
 import fetch from "node-fetch";
 
-import { CachedAPI } from "./types/main.interfaces";
+import { Cache } from "./types/main.interfaces";
 
 export default class Mastak {
-    private cache: Array<CachedAPI>;
+    private cache: Cache;
 
     constructor() {
-        this.cache = [];
+        this.cache = {};
     }
 
     set(): any {}
