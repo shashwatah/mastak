@@ -9,9 +9,9 @@ export default class Mastak {
         this.cache = {};
     }
 
-    set(key: string, api: CachedAPI): string {
+    async set(key: string, api: CachedAPI): Promise<string> {
         if(!(key in this.cache)) {
-            fetch(api.request.url, {
+            await fetch(api.request.url, {
                 method: api.request.method,
                 body: JSON.stringify(api.request.body),
                 headers: api.request.headers
