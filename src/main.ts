@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-import { Cache, CachedAPI, Request } from "./types/main.interfaces";
+import { Cache, CachedAPI } from "./types/main.interfaces";
 
 export default class Mastak {
     private cache: Cache;
@@ -9,7 +9,7 @@ export default class Mastak {
         this.cache = {};
     }
 
-    set(key: string, api: CachedAPI): Promise<string> {
+    set(key: string, api: CachedAPI): Promise<string | CachedAPI> {
         return new Promise(async (resolve, reject) => {
             if(!(key in this.cache)) {
                 await fetch(api.request.url, {
@@ -31,14 +31,22 @@ export default class Mastak {
             } else {
                 reject("Error");
             }
-    
-            resolve("Success");
-            console.log(this.cache);
+
+            resolve(this.cache[key]);
         })
     }
 
+    get(key: string): Promise<string | CachedAPI> {
+        return new Promise((resolve, reject) => {
+            if(key in this.cache) {
+                resolve(this.cache[key]);
+            } else {
+                reject("Data not found");
+            }
+        });
+    }
+
     setMulti(): any {}
-    get(): any {}
     getMulti(): any {}
     delete(): any {}
     deleteMulti(): any {}
