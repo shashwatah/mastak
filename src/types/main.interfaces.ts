@@ -2,7 +2,7 @@ export interface Request {
     url: string,
     method: string,
     body?: {
-        [key: string]: string
+        [key: string]: any
     },
     headers?: {
         [key: string]: string
