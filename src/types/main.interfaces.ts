@@ -11,10 +11,10 @@ export interface Request {
 
 export interface CachedAPI {
     request: Request,
-    autoUpdate: boolean,
     updateInterval?: number,
-    dataProcessor?: any
-    data?: any
+    ttl?: number,
+    resProcessor?: any,
+    value?: any
 };
 
 export interface Cache {
