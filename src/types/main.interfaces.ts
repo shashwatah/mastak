@@ -20,3 +20,5 @@ export interface CachedAPI {
 export interface Cache {
     [key: string]: CachedAPI
 }
+
+export interface Options {}
