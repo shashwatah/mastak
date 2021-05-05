@@ -55,4 +55,9 @@ export default class Mastak {
     has(): any {}
     returnKeys(): any {}
     take(): any {}
+
+    updateData(): any {}
+    checkValues(): any {}
+    expire(): any {}
+    error(): any {}
 }
