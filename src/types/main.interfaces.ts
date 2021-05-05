@@ -21,4 +21,8 @@ export interface Cache {
     [key: string]: CachedAPI
 }
 
+export interface Errors {
+    [key: string]: string
+}
+
 export interface Options {}
