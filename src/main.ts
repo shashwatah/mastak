@@ -17,39 +17,36 @@ export default class Mastak {
     set(key: string, api: CachedAPI): Promise<string | CachedAPI> {
         return new Promise(async (resolve, reject) => {
             if(!(key in this.cache)) {
-                try {
-                    await fetch(api.request.url, {
-                        method: api.request.method,
-                        ...(("body" in api.request) && {body: JSON.stringify(api.request.body)}),
-                        ...(("headers" in api.request) && {headers: api.request.headers})
-                    }).then(response => response.json())
-                    .then(resJSON => {
-                        console.log(resJSON);
-                        if(api.resProcessor) {
-                            let processedData;
-                            try {
-                                processedData = api.resProcessor(resJSON);
-                            } catch (error) {
-                                let err = new Error();
-                                err.name = "BadProcessor";
-                                err.message = `There's something wrong with the response processor, err: ${error}`;
-                                throw err;
-                            }
-                            
-                            return(processedData);
-                        } else {
-                            return resJSON;
+                await fetch(api.request.url, {
+                    method: api.request.method,
+                    ...(("body" in api.request) && {body: JSON.stringify(api.request.body)}),
+                    ...(("headers" in api.request) && {headers: api.request.headers})
+                }).then(response => this.checkResponseStatus(response))
+                .then(response => response.json())
+                .then(resJSON => {
+                    console.log(resJSON);
+                    if(api.resProcessor) {
+                        let processedData;
+                        try {
+                            processedData = api.resProcessor(resJSON);
+                        } catch (error) {
+                            let err = new Error();
+                            err.name = "BadProcessor";
+                            err.message = `There's something wrong with the response processor, err: ${error}`;
+                            throw err;
                         }
-                    })
-                    .then(finalData => {
-                        this.cache[key] = api;
-                        this.cache[key].value = finalData;  
-                    }).catch(err => {
-                        reject(err.message);
-                    })
-                } catch(err) {
-                    reject(`There's something wrong with the request you entered, error: ${err}`);
-                }
+                        
+                        return(processedData);
+                    } else {
+                        return resJSON;
+                    }
+                })
+                .then(finalData => {
+                    this.cache[key] = api;
+                    this.cache[key].value = finalData;  
+                }).catch(err => {
+                    reject(err.message);
+                });
             } else {
                 reject("Error: Key already exists");
             }
@@ -68,19 +65,30 @@ export default class Mastak {
         });
     }
 
-    setMulti(): any {}
-    getMulti(): any {}
-    delete(): any {}
-    deleteMulti(): any {}
-    deleteAll(): any {}
-    update(): any {}
-    has(): any {}
-    returnKeys(): any {}
-    take(): any {}
+    checkResponseStatus(res: any): any {
+        if(res.ok) {
+            return res;
+        } else {
+            let error = new Error();
+            error.name = "BadRequest";
+            error.message = `There's something wrong with the request you entered, error: ${res.statusText}`;
+            throw error;
+        }
+    }
 
-    updateData(): any {}
-    checkValues(): any {}
-    expire(): any {}
-    generateError(): any {}
+    // setMulti(): any {}
+    // getMulti(): any {}
+    // delete(): any {}
+    // deleteMulti(): any {}
+    // deleteAll(): any {}
+    // update(): any {}
+    // has(): any {}
+    // returnKeys(): any {}
+    // take(): any {}
+
+    // updateData(): any {}
+    // checkValues(): any {}
+    // expire(): any {}
+    // generateError(): any {}
     
 }
