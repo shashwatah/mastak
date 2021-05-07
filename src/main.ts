@@ -15,7 +15,9 @@ export default class Mastak {
         "There's something wrong with the response processor; Error Message: _err_"
     };
   }
-
+  
+  // @type Core Function
+  // @desc Set a value in cache after making the request specified
   set(key: string, api: CachedAPI): Promise<string | CachedAPI> {
     return new Promise(async (resolve, reject) => {
       if (!(key in this.cache)) {
@@ -58,6 +60,8 @@ export default class Mastak {
     });
   }
 
+  // @type Core Function
+  // @desc Get the current value stored for an API
   get(key: string): Promise<string | CachedAPI> {
     return new Promise((resolve, reject) => {
       if (key in this.cache) {
@@ -68,6 +72,11 @@ export default class Mastak {
     });
   }
 
+  // delete(): any {}
+  // update(): any {}
+
+  // @type Internal Funciton
+  // @desc Check the response status to throw an error if a necessary 
   _checkResponseStatus(res: Response): Response {
     if (res.ok) {
       return res;
@@ -76,6 +85,9 @@ export default class Mastak {
     }
   }
 
+  // @type Internal Function
+  // @desc Generate an error with message from an error template based 
+  // on the type provided
   _generateError(type: string, errorMessage: string): Error {
     let error: Error = new Error();
     error.name = type;
@@ -85,10 +97,8 @@ export default class Mastak {
 
   // setMulti(): any {}
   // getMulti(): any {}
-  // delete(): any {}
   // deleteMulti(): any {}
   // deleteAll(): any {}
-  // update(): any {}
   // has(): any {}
   // returnKeys(): any {}
   // take(): any {}
