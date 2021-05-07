@@ -1,0 +1,30 @@
+[]  1. Primary Functions
+    [] 1. set()
+    [] 2. get() 
+    [] 3. delete()
+    [] 4. update() 
+
+[] 2. Secondary Functions 
+    [] 1. setMulti()
+    [] 2. getMulti()
+    [] 3. deleteMulti()
+    [] 4. deleteAll()
+    [] 5. take()
+    [] 6. has()
+    [] 7. returnKeys()
+
+[] 3. Core Functions 
+    [] 1. updateData()
+    [] 2. expire()
+
+[] 4. Internal Functions 
+    [] 1. _checkResponseStatus()
+    [] 2. _generateError()
+    [] 3. _checkValues()
+
+
+[] 5. Misc. 
+    [] 1. Options for the module
+    [] 2. Better error templates
+    [] 3. More organised and uniform format of output for each function 
+          whether it be valid response or errors
