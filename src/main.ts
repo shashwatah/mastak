@@ -16,7 +16,7 @@ export default class Mastak {
     };
   }
   
-  // @type Core Function
+  // @type Primary Function
   // @desc Set a value in cache after making the request specified
   set(key: string, api: CachedAPI): Promise<CachedAPI> {
     return new Promise(async (resolve, reject) => {
@@ -60,7 +60,7 @@ export default class Mastak {
     });
   }
 
-  // @type Core Function
+  // @type Primary Function
   // @desc Get the current value stored for an API
   get(key: string): Promise<CachedAPI> {
     return new Promise((resolve, reject) => {
@@ -72,7 +72,7 @@ export default class Mastak {
     });
   }
 
-  // @type Core Function
+  // @type Primary Function
   // @desc Delete a cached API based on the key entered
   delete(key: string): Promise<string> {
       return new Promise((resolve, reject) => {
@@ -85,7 +85,7 @@ export default class Mastak {
       });
   }
 
-  // @type Core Function
+  // @type Secondary Function
   // @desc Delete a cached API and return its value
   take(key: string): Promise<CachedAPI> {
       return new Promise((resolve, reject) => {
