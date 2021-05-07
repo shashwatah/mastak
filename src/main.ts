@@ -72,7 +72,20 @@ export default class Mastak {
     });
   }
 
-  // delete(): any {}
+  // @type Core Function
+  // @desc Delete a cached API based on the key entered
+  delete(key: string): Promise<string> {
+      return new Promise((resolve, reject) => {
+        if(key in this.cache) {
+            delete this.cache[key];
+            resolve("API has been deleted from cache");
+        } else {
+            reject("Error: Key does not exist");
+        }
+      });
+  }
+
+
   // update(): any {}
 
   // @type Internal Funciton
