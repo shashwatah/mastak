@@ -18,7 +18,7 @@ export default class Mastak {
   
   // @type Core Function
   // @desc Set a value in cache after making the request specified
-  set(key: string, api: CachedAPI): Promise<string | CachedAPI> {
+  set(key: string, api: CachedAPI): Promise<CachedAPI> {
     return new Promise(async (resolve, reject) => {
       if (!(key in this.cache)) {
         await fetch(api.request.url, {
@@ -62,7 +62,7 @@ export default class Mastak {
 
   // @type Core Function
   // @desc Get the current value stored for an API
-  get(key: string): Promise<string | CachedAPI> {
+  get(key: string): Promise<CachedAPI> {
     return new Promise((resolve, reject) => {
       if (key in this.cache) {
         resolve(this.cache[key]);
@@ -83,6 +83,20 @@ export default class Mastak {
             reject("Error: Key does not exist");
         }
       });
+  }
+
+  // @type Core Function
+  // @desc Delete a cached API and return its value
+  take(key: string): Promise<CachedAPI> {
+      return new Promise((resolve, reject) => {
+          if(key in this.cache) {
+              let temp = this.cache[key];
+              delete this.cache[key];
+              resolve(temp);
+          } else {
+              reject("Error: Key does not exist");
+          }
+      })
   }
 
 
@@ -114,10 +128,8 @@ export default class Mastak {
   // deleteAll(): any {}
   // has(): any {}
   // returnKeys(): any {}
-  // take(): any {}
 
   // updateData(): any {}
   // checkValues(): any {}
   // expire(): any {}
-  // generateError(): any {}
 }
