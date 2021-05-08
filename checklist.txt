@@ -20,8 +20,8 @@
 [] 4. Internal Functions 
     [✓] 1. _checkResponseStatus(): Check the response status of a request made
     [✓] 2. _generateError(): Generate Errors with messages based on error templates
-    [] 3. _processRequest(): Send the request and process the response
-    [] 3. _checkValues()
+    [✓] 3. _processRequest(): Send the request and process the response
+    [] 4. _checkValues()
 
 
 [] 5. Misc. 
