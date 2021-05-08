@@ -1,6 +1,6 @@
 import fetch, { Response } from "node-fetch";
 
-import { Cache, CachedAPI, Errors } from "./types/main.interfaces";
+import { Cache, CachedAPI, Errors, Request } from "./types/main.interfaces";
 
 export default class Mastak {
   private cache: Cache;
@@ -21,37 +21,14 @@ export default class Mastak {
   set(key: string, api: CachedAPI): Promise<CachedAPI> {
     return new Promise(async (resolve, reject) => {
       if (!(key in this.cache)) {
-        await fetch(api.request.url, {
-          method: api.request.method,
-          ...("body" in api.request && {
-            body: JSON.stringify(api.request.body),
-          }),
-          ...("headers" in api.request && { headers: api.request.headers }),
-        })
-          .then((response) => this._checkResponseStatus(response))
-          .then((response) => response.json())
-          .then((resJSON) => {
-            console.log(resJSON);
-            if (api.resProcessor) {
-              let processedData;
-              try {
-                processedData = api.resProcessor(resJSON);
-              } catch (error) {
-                let err = this._generateError("BadProcessor", error);
-                throw err;
-              }
-              return processedData;
-            } else {
-              return resJSON;
-            }
-          })
-          .then((finalData) => {
+        await this._processRequest(api.request, api.resProcessor)
+        .then((data) => {
             this.cache[key] = api;
-            this.cache[key].value = finalData;
-          })
-          .catch((err) => {
-            reject(err.message);
-          });
+            this.cache[key].value = data;
+        })
+        .catch((err) => {
+            reject(err);
+        });
       } else {
         reject("Error: The Key entered already exists");
       }
@@ -87,7 +64,7 @@ export default class Mastak {
 
   // @type Primary Function 
   // @desc Update a cached API 
-  update(key: string, api: CachedAPI, updateNow: boolean): any {
+  update(key: string, api: CachedAPI, updateNow: boolean): Promise<CachedAPI> {
     return new Promise((resolve, reject) => {
         if(key in this.cache) {
             for(const property in api) {
@@ -95,6 +72,7 @@ export default class Mastak {
                     this.cache[key][property] = api[property];
                 } 
             }
+            resolve(this.cache[key]);
         } else {
             reject("Error: Key does not exist")
         }
@@ -113,6 +91,39 @@ export default class Mastak {
               reject("Error: Key does not exist");
           }
       })
+  }
+
+  // @type Internal Function
+  // @desc Send the request and proecess the response
+  _processRequest(request: Request, resProcessor?: any): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+        await fetch(request.url, {
+        method: request.method,
+        ...("body" in request && {
+            body: JSON.stringify(request.body),
+        }),
+        ...("headers" in request && { headers: request.headers }),
+        })
+        .then((response) => this._checkResponseStatus(response))
+        .then((response) => response.json())
+        .then((resJSON) => {
+            console.log(resJSON);
+            if (resProcessor) {
+                let processedData;
+                try {
+                    processedData = resProcessor(resJSON);
+                } catch (error) {
+                    let err = this._generateError("BadProcessor", error);
+                    throw err;
+                }
+                resolve(processedData);
+            } else {
+                resolve(resJSON);
+            }
+        }).catch(err => {
+            reject(err.message)
+        })
+    });
   }
 
   // @type Internal Funciton
