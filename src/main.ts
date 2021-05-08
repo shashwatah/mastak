@@ -85,6 +85,22 @@ export default class Mastak {
       });
   }
 
+  // @type Primary Function 
+  // @desc Update a cached API 
+  update(key: string, api: CachedAPI, updateNow: boolean): any {
+    return new Promise((resolve, reject) => {
+        if(key in this.cache) {
+            for(const property in api) {
+                if(this.cache[key][property]) {
+                    this.cache[key][property] = api[property];
+                } 
+            }
+        } else {
+            reject("Error: Key does not exist")
+        }
+    })
+  }
+
   // @type Secondary Function
   // @desc Delete a cached API and return its value
   take(key: string): Promise<CachedAPI> {
@@ -98,9 +114,6 @@ export default class Mastak {
           }
       })
   }
-
-
-  // update(): any {}
 
   // @type Internal Funciton
   // @desc Check the response status to throw an error if a necessary 
