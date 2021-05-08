@@ -10,6 +10,7 @@ export interface Request {
 }
 
 export interface CachedAPI {
+  [key: string] : any;
   request: Request;
   updateInterval?: number;
   ttl?: number;
