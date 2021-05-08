@@ -1,15 +1,15 @@
-[]  1. Primary Functions
-    [] 1. set(): Set a value in cache after making the request specified
-    [] 2. get(): Get the current value stored for an API
-    [] 3. delete(): Delete a cached API based on the key entered
-    [] 4. update(): Update a cached API 
+[✓]  1. Primary Functions
+    [✓] 1. set(): Set a value in cache after making the request specified
+    [✓] 2. get(): Get the current value stored for an API
+    [✓] 3. delete(): Delete a cached API based on the key entered
+    [✓] 4. update(): Update a cached API 
 
 [] 2. Secondary Functions 
     [] 1. setMulti(): Set multiple values in cache 
     [] 2. getMulti(): Get the current value of multiple keys from the cache
     [] 3. deleteMulti(): Delete multiple cached APIs
     [] 4. deleteAll(): Delete all the data
-    [] 5. take(): Delete a cached API and return its last value
+    [✓] 5. take(): Delete a cached API and return its last value
     [] 6. has(): Check if the cache has a key
     [] 7. returnKeys(): Return all the keys currently stored in the cache
 
@@ -18,8 +18,8 @@
     [] 2. expire()
 
 [] 4. Internal Functions 
-    [] 1. _checkResponseStatus(): Check the response status of a request made
-    [] 2. _generateError(): Generate Errors with messages based on error templates
+    [✓] 1. _checkResponseStatus(): Check the response status of a request made
+    [✓] 2. _generateError(): Generate Errors with messages based on error templates
     [] 3. _checkValues()
 
 
