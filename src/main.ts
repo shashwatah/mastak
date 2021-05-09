@@ -1,6 +1,6 @@
 import fetch, { Response } from "node-fetch";
 
-import { Cache, CachedAPI, Errors, Request } from "./types/main.interfaces";
+import { Cache, CachedAPI, Errors, Request, MultipleValues } from "./types/main.interfaces";
 
 export default class Mastak {
   private cache: Cache;
@@ -37,10 +37,10 @@ export default class Mastak {
 
   // @type Primary Function
   // @desc Get the current value stored for an API
-  get(key: string): Promise<CachedAPI> {
+  get(key: string): Promise<any> {
     return new Promise((resolve, reject) => {
       if (key in this.cache) {
-        resolve(this.cache[key]);
+        resolve(this.cache[key].value);
       } else {
         return reject(this._generateError("BadKey", "Key does not exist"));
       }
@@ -82,6 +82,25 @@ export default class Mastak {
         return reject(this._generateError("BadKey", "Key does not exist"));
       }
     });
+  }
+
+  // @type Secondary Function
+  // @desc Return current values for multiple keys 
+  getMulti(keys: Array<string>): Promise<MultipleValues> {
+    return new Promise(async (resolve, reject) => {
+        let data: MultipleValues = {};
+        
+        for(const key of keys) {
+            console.log(key)
+            if (key in this.cache) {
+                data[key] = this.cache[key].value;
+            } else {
+                return reject(this._generateError("BadKey", `Key "${key}" does not exist`));
+            }   
+        }
+
+        resolve(data);
+    })
   }
 
   // @type Secondary Function
@@ -158,7 +177,7 @@ export default class Mastak {
   // deleteMulti(): any {}
   // deleteAll(): any {}
   // has(): any {}
-  // returnKeys(): any {}
+  // keys(): any {}
 
   // updateData(): any {}
   // checkValues(): any {}

@@ -27,3 +27,7 @@ export interface Errors {
 }
 
 export interface Options {}
+
+export interface MultipleValues {
+    [key: string]: any;
+}
