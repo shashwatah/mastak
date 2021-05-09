@@ -12,7 +12,8 @@ export default class Mastak {
       BadRequest:
         "There's something wrong with the request; Error Message: _err_",
       BadProcessor:
-        "There's something wrong with the response processor; Error Message: _err_"
+        "There's something wrong with the response processor; Error Message: _err_",
+      BadKey: "There's something wrong with the key; Error Message: _err_"
     };
   }
   
@@ -20,20 +21,19 @@ export default class Mastak {
   // @desc Set a value in cache after making the request specified
   set(key: string, api: CachedAPI): Promise<CachedAPI> {
     return new Promise(async (resolve, reject) => {
-      if (!(key in this.cache)) {
-        await this._processRequest(api.request, api.resProcessor)
-        .then((data) => {
-            this.cache[key] = api;
-            this.cache[key].value = data;
-        })
-        .catch((err) => {
-            reject(err);
-        });
-      } else {
-        reject("Error: The Key entered already exists");
-      }
-
-      resolve(this.cache[key]);
+        if (!(key in this.cache)) {
+            let data;
+            try {
+                data = await this._processRequest(api.request, api.resProcessor);
+                this.cache[key] = api;
+                this.cache[key].value = data;
+                resolve(this.cache[key]);
+            } catch(err) {
+                return reject(err);
+            } 
+        } else {
+           return reject(this._generateError("BadKey", "Key already exists"));
+        }
     });
   }
 
@@ -97,32 +97,34 @@ export default class Mastak {
   // @desc Send the request and proecess the response
   _processRequest(request: Request, resProcessor?: any): Promise<any> {
     return new Promise(async (resolve, reject) => {
-        await fetch(request.url, {
+        let response = await fetch(request.url, {
         method: request.method,
         ...("body" in request && {
             body: JSON.stringify(request.body),
         }),
         ...("headers" in request && { headers: request.headers }),
-        })
-        .then((response) => this._checkResponseStatus(response))
-        .then((response) => response.json())
-        .then((resJSON) => {
-            console.log(resJSON);
-            if (resProcessor) {
-                let processedData;
-                try {
-                    processedData = resProcessor(resJSON);
-                } catch (error) {
-                    let err = this._generateError("BadProcessor", error);
-                    throw err;
-                }
-                resolve(processedData);
-            } else {
-                resolve(resJSON);
+        });
+            
+        try{
+            response = this._checkResponseStatus(response);
+        } catch(err) {
+            return reject(err);
+        }  
+
+        let resJSON = await response.json();
+
+        if (resProcessor) {
+            let processedData;
+            try {
+                processedData = resProcessor(resJSON);
+            } catch (error) {
+                let err = this._generateError("BadProcessor", error);
+                return reject(err);
             }
-        }).catch(err => {
-            reject(err.message)
-        })
+            resolve(processedData);
+        } else {
+            resolve(resJSON);
+        }
     });
   }
 
