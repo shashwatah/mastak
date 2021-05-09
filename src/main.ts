@@ -10,10 +10,10 @@ export default class Mastak {
     this.cache = {};
     this.errors = {
       BadRequest:
-        "There's something wrong with the request; Error Message: _err_",
+        "There's something wrong with the request",
       BadProcessor:
-        "There's something wrong with the response processor; Error Message: _err_",
-      BadKey: "There's something wrong with the key; Error Message: _err_"
+        "There's something wrong with the response processor",
+      BadKey: "There's something wrong with the key"
     };
   }
   
@@ -44,20 +44,20 @@ export default class Mastak {
       if (key in this.cache) {
         resolve(this.cache[key]);
       } else {
-        reject("Error: Data does not exist");
+        return reject(this._generateError("BadKey", "Key does not exist"))
       }
     });
   }
 
   // @type Primary Function
   // @desc Delete a cached API based on the key entered
-  delete(key: string): Promise<string> {
+  delete(key: string): Promise<boolean> {
       return new Promise((resolve, reject) => {
         if(key in this.cache) {
             delete this.cache[key];
-            resolve("API has been deleted from cache");
+            resolve(true); // Might change this later on
         } else {
-            reject("Error: Key does not exist");
+            return reject(this._generateError("BadKey", "Key does not exist"))
         }
       });
   }
@@ -144,7 +144,7 @@ export default class Mastak {
   _generateError(type: string, errorMessage: string): Error {
     let error: Error = new Error();
     error.name = type;
-    error.message = `Error: ${this.errors[type].replace("_err_", errorMessage)}`;
+    error.message = `ERROR: ${type}: ${this.errors[type]}; info: ${errorMessage}`;
     return error;
   }
 
