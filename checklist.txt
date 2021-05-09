@@ -8,7 +8,7 @@
     [✓] 1. setMulti(): Set multiple values in cache 
     [✓] 2. getMulti(): Get the current value of multiple keys from the cache
     [] 3. deleteMulti(): Delete multiple cached APIs
-    [] 4. deleteAll(): Delete all the data
+    [] 4. flush(): Delete all the data
     [✓] 5. take(): Delete a cached API and return its last value
     [] 6. has(): Check if the cache has a key
     [] 7. keys(): Return all the keys currently stored in the cache
