@@ -63,16 +63,23 @@ export default class Mastak {
   // @type Primary Function
   // @desc Update a cached API
   update(key: string, api: CachedAPI, updateNow: boolean): Promise<CachedAPI> {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       if (key in this.cache) {
         for (const property in api) {
           if (this.cache[key][property]) {
             this.cache[key][property] = api[property];
           }
         }
+        
+        if(updateNow) {
+          let data = await this._processRequest(api.request, api.resProcessor);
+          this.cache[key] = api;
+          this.cache[key].value = data;
+        }
+
         resolve(this.cache[key]);
       } else {
-        reject("Error: Key does not exist");
+        return reject(this._generateError("BadKey", "Key does not exist"));
       }
     });
   }
