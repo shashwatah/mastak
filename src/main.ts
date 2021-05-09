@@ -12,6 +12,7 @@ export default class Mastak {
       BadRequest: "There's something wrong with the request",
       BadProcessor: "There's something wrong with the response processor",
       BadKey: "There's something wrong with the key",
+      BadInput: "There's something wrong with the input"
     };
   }
 
@@ -85,13 +86,47 @@ export default class Mastak {
   }
 
   // @type Secondary Function
+  // @desc Set multiple values in cache
+  // As of now this works perfectly fine but the code needs a refactor
+  setMulti(keys: Array<string>, apis: Array<CachedAPI>): Promise<Array<CachedAPI>> {
+      return new Promise(async (resolve, reject) => {
+        if(keys.length !== apis.length) {
+            return reject(this._generateError("BadInput", "Array lengths don't match"));
+        }
+
+        for(const key of keys) {
+          if(key in this.cache) {
+            return reject(this._generateError("BadKey", `Key "${key}" already exists in the cache`));
+          }
+        }    
+
+        let processedAPIs: Array<CachedAPI> = [];
+        for(const i in keys) {
+          let data: any;
+          try {
+            data = await this._processRequest(apis[i].request, apis[i].resProcessor);
+            processedAPIs[i] = apis[i];
+            processedAPIs[i].value = data;
+          } catch(err) {
+              return reject(err);
+          }
+        }
+
+        for(const i in keys) {
+            this.cache[keys[i]] = processedAPIs[i];
+        }
+
+        resolve(processedAPIs);
+      })
+  }
+
+  // @type Secondary Function
   // @desc Return current values for multiple keys 
   getMulti(keys: Array<string>): Promise<MultipleValues> {
     return new Promise(async (resolve, reject) => {
         let data: MultipleValues = {};
         
         for(const key of keys) {
-            console.log(key)
             if (key in this.cache) {
                 data[key] = this.cache[key].value;
             } else {
@@ -172,8 +207,6 @@ export default class Mastak {
     return error;
   }
 
-  // setMulti(): any {}
-  // getMulti(): any {}
   // deleteMulti(): any {}
   // deleteAll(): any {}
   // has(): any {}
