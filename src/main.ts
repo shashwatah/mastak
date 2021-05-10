@@ -5,7 +5,7 @@ import {
   CachedAPI,
   Errors,
   Request,
-  MultipleValues,
+  ValueSet,
 } from "./types/main.interfaces";
 
 export default class Mastak {
@@ -141,9 +141,9 @@ export default class Mastak {
 
   // @type Secondary Function
   // @desc Return current values for multiple keys
-  getMulti(keys: Array<string>): Promise<MultipleValues> {
+  getMulti(keys: Array<string>): Promise<ValueSet> {
     return new Promise(async (resolve, reject) => {
-      let data: MultipleValues = {};
+      let data: ValueSet = {};
 
       for (const key of keys) {
         if (key in this.cache) {
@@ -157,6 +157,24 @@ export default class Mastak {
 
       resolve(data);
     });
+  }
+
+  // @type Secondary Function
+  // @desc Delete multiple apis from the cache
+  deleteMulti(keys: Array<string>): Promise<boolean> {
+      return new Promise((resolve, reject) => {
+        for(const key of keys) {
+            if(!(key in this.cache)) {
+                return reject(this._generateError("BadKey", `Key ${key} does not exist`));
+            }
+        }
+
+        for(const key of keys) {
+            delete this.cache[key];
+        }
+
+        resolve(true);
+      });
   }
 
   // @type Secondary Function
@@ -228,7 +246,7 @@ export default class Mastak {
     return error;
   }
 
-  // deleteMulti(): any {}
+  
   // flush(): any {}
   // has(): any {}
   // keys(): any {}

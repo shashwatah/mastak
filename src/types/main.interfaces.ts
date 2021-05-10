@@ -1,3 +1,7 @@
+export interface ValueSet {
+    [key: string]: any;
+}
+
 export interface Request {
   url: string;
   method: string;
@@ -9,8 +13,7 @@ export interface Request {
   };
 }
 
-export interface CachedAPI {
-  [key: string]: any;
+export interface CachedAPI extends ValueSet{
   request: Request;
   updateInterval?: number;
   ttl?: number;
@@ -28,6 +31,3 @@ export interface Errors {
 
 export interface Options {}
 
-export interface MultipleValues {
-  [key: string]: any;
-}
