@@ -7,11 +7,11 @@
 [] 2. Secondary Functions 
     [✓] 1. setMulti(): Set multiple values in cache 
     [✓] 2. getMulti(): Get the current value of multiple keys from the cache
-    [] 3. deleteMulti(): Delete multiple cached APIs
-    [] 4. flush(): Delete all the data
+    [✓] 3. deleteMulti(): Delete multiple cached APIs
+    [✓] 4. flush(): Delete all the data
     [✓] 5. take(): Delete a cached API and return its last value
-    [] 6. has(): Check if the cache has a key
-    [] 7. keys(): Return all the keys currently stored in the cache
+    [✓] 6. has(): Check if the cache has a key
+    [✓] 7. keys(): Return all the keys currently stored in the cache
 
 [] 3. Core Functions 
     [] 1. updateData()
@@ -30,4 +30,4 @@
     [✓] 3. More organised and uniform format of output for each function 
           whether it be valid response or errors
     [✓] 4. Replace Promises
-    [] 5. Identifiers & Outputs
+    [] 5. Identifiers, Interfaces and Outputs
