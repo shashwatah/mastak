@@ -10,7 +10,7 @@ export interface Request {
 }
 
 export interface CachedAPI {
-  [key: string] : any;
+  [key: string]: any;
   request: Request;
   updateInterval?: number;
   ttl?: number;
@@ -29,5 +29,5 @@ export interface Errors {
 export interface Options {}
 
 export interface MultipleValues {
-    [key: string]: any;
+  [key: string]: any;
 }
