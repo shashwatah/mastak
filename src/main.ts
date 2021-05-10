@@ -1,6 +1,12 @@
 import fetch, { Response } from "node-fetch";
 
-import { Cache, CachedAPI, Errors, Request, MultipleValues } from "./types/main.interfaces";
+import {
+  Cache,
+  CachedAPI,
+  Errors,
+  Request,
+  MultipleValues,
+} from "./types/main.interfaces";
 
 export default class Mastak {
   private cache: Cache;
@@ -12,7 +18,7 @@ export default class Mastak {
       BadRequest: "There's something wrong with the request",
       BadProcessor: "There's something wrong with the response processor",
       BadKey: "There's something wrong with the key",
-      BadInput: "There's something wrong with the input"
+      BadInput: "There's something wrong with the input",
     };
   }
 
@@ -71,8 +77,8 @@ export default class Mastak {
             this.cache[key][property] = api[property];
           }
         }
-        
-        if(updateNow) {
+
+        if (updateNow) {
           let data = await this._processRequest(api.request, api.resProcessor);
           this.cache[key] = api;
           this.cache[key].value = data;
@@ -88,54 +94,69 @@ export default class Mastak {
   // @type Secondary Function
   // @desc Set multiple values in cache
   // As of now this works perfectly fine but the code needs a refactor
-  setMulti(keys: Array<string>, apis: Array<CachedAPI>): Promise<Array<CachedAPI>> {
-      return new Promise(async (resolve, reject) => {
-        if(keys.length !== apis.length) {
-            return reject(this._generateError("BadInput", "Array lengths don't match"));
+  setMulti(
+    keys: Array<string>,
+    apis: Array<CachedAPI>
+  ): Promise<Array<CachedAPI>> {
+    return new Promise(async (resolve, reject) => {
+      if (keys.length !== apis.length) {
+        return reject(
+          this._generateError("BadInput", "Array lengths don't match")
+        );
+      }
+
+      for (const key of keys) {
+        if (key in this.cache) {
+          return reject(
+            this._generateError(
+              "BadKey",
+              `Key "${key}" already exists in the cache`
+            )
+          );
         }
+      }
 
-        for(const key of keys) {
-          if(key in this.cache) {
-            return reject(this._generateError("BadKey", `Key "${key}" already exists in the cache`));
-          }
-        }    
-
-        let processedAPIs: Array<CachedAPI> = [];
-        for(const i in keys) {
-          let data: any;
-          try {
-            data = await this._processRequest(apis[i].request, apis[i].resProcessor);
-            processedAPIs[i] = apis[i];
-            processedAPIs[i].value = data;
-          } catch(err) {
-              return reject(err);
-          }
+      let processedAPIs: Array<CachedAPI> = [];
+      for (const i in keys) {
+        let data: any;
+        try {
+          data = await this._processRequest(
+            apis[i].request,
+            apis[i].resProcessor
+          );
+          processedAPIs[i] = apis[i];
+          processedAPIs[i].value = data;
+        } catch (err) {
+          return reject(err);
         }
+      }
 
-        for(const i in keys) {
-            this.cache[keys[i]] = processedAPIs[i];
-        }
+      for (const i in keys) {
+        this.cache[keys[i]] = processedAPIs[i];
+      }
 
-        resolve(processedAPIs);
-      })
+      resolve(processedAPIs);
+    });
   }
 
   // @type Secondary Function
-  // @desc Return current values for multiple keys 
+  // @desc Return current values for multiple keys
   getMulti(keys: Array<string>): Promise<MultipleValues> {
     return new Promise(async (resolve, reject) => {
-        let data: MultipleValues = {};
-        
-        for(const key of keys) {
-            if (key in this.cache) {
-                data[key] = this.cache[key].value;
-            } else {
-                return reject(this._generateError("BadKey", `Key "${key}" does not exist`));
-            }   
-        }
+      let data: MultipleValues = {};
 
-        resolve(data);
-    })
+      for (const key of keys) {
+        if (key in this.cache) {
+          data[key] = this.cache[key].value;
+        } else {
+          return reject(
+            this._generateError("BadKey", `Key "${key}" does not exist`)
+          );
+        }
+      }
+
+      resolve(data);
+    });
   }
 
   // @type Secondary Function
@@ -208,7 +229,7 @@ export default class Mastak {
   }
 
   // deleteMulti(): any {}
-  // deleteAll(): any {}
+  // flush(): any {}
   // has(): any {}
   // keys(): any {}
 
