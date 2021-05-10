@@ -44,27 +44,23 @@ export default class Mastak {
 
   // @type Primary Function
   // @desc Get the current value stored for an API
-  get(key: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      if (key in this.cache) {
-        resolve(this.cache[key].value);
-      } else {
-        return reject(this._generateError("BadKey", "Key does not exist"));
-      }
-    });
+  get(key: string): any {
+    if (key in this.cache) {
+      return this.cache[key].value;
+    } else {
+      throw this._generateError("BadKey", "Key does not exist");
+    }
   }
 
   // @type Primary Function
   // @desc Delete a cached API based on the key entered
-  delete(key: string): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      if (key in this.cache) {
-        delete this.cache[key];
-        resolve(true); // Might change this later on
-      } else {
-        return reject(this._generateError("BadKey", "Key does not exist"));
-      }
-    });
+  delete(key: string): boolean {
+    if (key in this.cache) {
+      delete this.cache[key];
+      return true; // Might change this later on
+    } else {
+      throw this._generateError("BadKey", "Key does not exist");
+    }
   }
 
   // @type Primary Function
@@ -141,54 +137,53 @@ export default class Mastak {
 
   // @type Secondary Function
   // @desc Return current values for multiple keys
-  getMulti(keys: Array<string>): Promise<ValueSet> {
-    return new Promise(async (resolve, reject) => {
-      let data: ValueSet = {};
+  getMulti(keys: Array<string>): ValueSet {
+    let data: ValueSet = {};
 
-      for (const key of keys) {
-        if (key in this.cache) {
-          data[key] = this.cache[key].value;
-        } else {
-          return reject(
-            this._generateError("BadKey", `Key "${key}" does not exist`)
-          );
-        }
+    for (const key of keys) {
+      if (key in this.cache) {
+        data[key] = this.cache[key].value;
+      } else {
+        throw this._generateError("BadKey", `Key "${key}" does not exist`);
       }
+    }
 
-      resolve(data);
-    });
+    return data;
   }
 
   // @type Secondary Function
   // @desc Delete multiple apis from the cache
-  deleteMulti(keys: Array<string>): Promise<boolean> {
-      return new Promise((resolve, reject) => {
-        for(const key of keys) {
-            if(!(key in this.cache)) {
-                return reject(this._generateError("BadKey", `Key ${key} does not exist`));
-            }
-        }
+  deleteMulti(keys: Array<string>): boolean {
+    for (const key of keys) {
+      if (!(key in this.cache)) {
+        throw this._generateError("BadKey", `Key ${key} does not exist`);
+      }
+    }
 
-        for(const key of keys) {
-            delete this.cache[key];
-        }
+    for (const key of keys) {
+      delete this.cache[key];
+    }
 
-        resolve(true);
-      });
+    return true;
   }
 
   // @type Secondary Function
   // @desc Delete a cached API and return its value
-  take(key: string): Promise<CachedAPI> {
-    return new Promise((resolve, reject) => {
-      if (key in this.cache) {
-        let temp = this.cache[key];
-        delete this.cache[key];
-        resolve(temp);
-      } else {
-        reject("Error: Key does not exist");
-      }
-    });
+  take(key: string): CachedAPI {
+    if (key in this.cache) {
+      let temp = this.cache[key];
+      delete this.cache[key];
+      return temp;
+    } else {
+      throw this._generateError("BadKey", `Key ${key} does not exist`);
+    }
+  }
+
+  // @type Secondary Function
+  // @desc Delete all the date in the cache
+  flush(): boolean {
+    this.cache = {};
+    return true;
   }
 
   // @type Internal Function
@@ -246,8 +241,6 @@ export default class Mastak {
     return error;
   }
 
-  
-  // flush(): any {}
   // has(): any {}
   // keys(): any {}
 
