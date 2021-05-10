@@ -27,7 +27,9 @@
 [] 5. Misc. 
     [] 1. Options for the module
     [] 2. Better error templates
-    [✓] 3. More organised and uniform format of output for each function 
+    [] 3. TTL and Update loops
+    [✓] 4. More organised and uniform format of output for each function 
           whether it be valid response or errors
-    [✓] 4. Replace Promises
-    [] 5. Identifiers, Interfaces and Outputs
+    [✓] 5. Replace Promises
+    [] 6. Identifiers, Interfaces and Outputs
+    
