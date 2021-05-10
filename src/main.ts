@@ -186,6 +186,23 @@ export default class Mastak {
     return true;
   }
 
+  // @type Secondary Function
+  // @desc Returns a boolean informing if the cache contains a specific key
+  has(key: string): boolean {
+    if (key in this.cache) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // @type Secondary Function
+  // @desc Returns all the keys in the cache
+  keys(): Array<string> {
+    const keys = Object.getOwnPropertyNames(this.cache);
+    return keys;
+  }
+
   // @type Internal Function
   // @desc Send the request and proecess the response
   _processRequest(request: Request, resProcessor?: any): Promise<any> {
@@ -240,9 +257,6 @@ export default class Mastak {
     error.message = `ERROR: ${type}: ${this.errors[type]}; info: ${errorMessage}`;
     return error;
   }
-
-  // has(): any {}
-  // keys(): any {}
 
   // updateData(): any {}
   // checkValues(): any {}
