@@ -32,4 +32,15 @@
           whether it be valid response or errors
     [✓] 5. Replace Promises
     [] 6. Identifiers, Interfaces and Outputs
-    
+
+TO-DO
+-   Cache options(standardTTL & checkPeriod as of now, maybe forceString)
+-   Timed loop that checks each key to see if it needs to be updated
+    or has expired(has exceeded its ttl)
+-   Delete the key or update its value if the previous condition is met
+-   Update the documentation - consistent use of terminology, make it more 
+    comprehensive
+-   Update the interfaces, and indentifier names
+-   Uniform outputs and errors, update the error templates, make throwing
+    errors more efficient
+-   comprehensive README and logo
