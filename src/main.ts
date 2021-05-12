@@ -68,11 +68,7 @@ export default class Mastak {
   update(key: string, api: CachedAPI, updateNow: boolean): Promise<CachedAPI> {
     return new Promise(async (resolve, reject) => {
       if (key in this.cache) {
-        for (const property in api) {
-          if (this.cache[key][property]) {
-            this.cache[key][property] = api[property];
-          }
-        }
+        Object.assign(this.cache[key], api)
 
         if (updateNow) {
           let data = await this._processRequest(api.request, api.resProcessor);
