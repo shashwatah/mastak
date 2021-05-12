@@ -6,20 +6,19 @@ import {
   Errors,
   Request,
   ValueSet,
+  Options
 } from "./types/main.interfaces";
 
 export default class Mastak {
   private cache: Cache;
-  private errors: Errors;
+  private options: Options;
 
-  constructor() {
+  constructor(options?: Options) {
     this.cache = {};
-    this.errors = {
-      BadRequest: "There's something wrong with the request",
-      BadProcessor: "There's something wrong with the response processor",
-      BadKey: "There's something wrong with the key",
-      BadInput: "There's something wrong with the input",
-    };
+    this.options = Object.assign({
+      stdTTL: 0,
+      checkPeriod: 300 // in seconds
+    }, options)
   }
 
   // @type Primary Function
@@ -248,9 +247,16 @@ export default class Mastak {
   // @desc Generate an error with message from an error template based
   // on the type provided
   _generateError(type: string, errorMessage: string): Error {
+    const errors: Errors= {
+      BadRequest: "There's something wrong with the request",
+      BadProcessor: "There's something wrong with the response processor",
+      BadKey: "There's something wrong with the key",
+      BadInput: "There's something wrong with the input",
+    };
+
     let error: Error = new Error();
     error.name = type;
-    error.message = `ERROR: ${type}: ${this.errors[type]}; info: ${errorMessage}`;
+    error.message = `ERROR: ${type}: ${errors[type]}; info: ${errorMessage}`;
     return error;
   }
 

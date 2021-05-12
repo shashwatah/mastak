@@ -29,5 +29,8 @@ export interface Errors {
   [key: string]: string;
 }
 
-export interface Options {}
+export interface Options {
+    stdTTL?: number;
+    checkPeriod?: number;
+}
 
