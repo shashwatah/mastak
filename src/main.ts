@@ -40,7 +40,7 @@ export default class Mastak {
           this.cache[key] = Object.assign({
             setTime: now,
             lastUpdate: now,
-            value: data,
+            value: data
           }, api);
 
           resolve(this.cache[key]);
@@ -218,7 +218,36 @@ export default class Mastak {
   // @type Core Function
   // @desc Check all the data for TTL and Auto-Update, regularly
   checkData(): void {
+    for(const key in this.cache) {
+        let now = Date.now();
 
+        let ttlms = (this.cache[key].ttl || this.options.stdTTL) * 1000;
+        if(ttlms > 0) {
+            if(ttlms+this.cache[key].setTime < now) {
+                console.log(`Deleting key '${key}'; setTime: ${this.cache[key].setTime}; ttl: ${this.cache[key].ttl || this.options.stdTTL}; timeNow: ${now}'`);
+                delete this.cache[key];
+                console.log(`Key '${key}'`);
+                continue;
+            }
+        }
+
+        let uims = (this.cache[key].updateInterval || this.options.updateInterval) * 1000;
+        if(this.options.autoUpdate) {
+            if(uims+this.cache[key].lastUpdate < now) {
+                console.log(`Updating key '${key}'; lastUpdate: ${this.cache[key].lastUpdate}; updateInterval: ${this.cache[key].updateInterval || this.options.updateInterval}; timeNow: ${now}'`);
+                this._processRequest(this.cache[key].request, this.cache[key].resProcessor)
+                .then(data => {
+                    this.cache[key].value = data;
+                    this.cache[key].lastUpdate = now;
+                    console.log(`Key '${key}' updated`);
+                })
+                .catch(err => {
+                    console.log(`Skipping updation for key '${key}'; an error occured; msg: ${err.message}`);
+                });
+            }
+        }
+    }
+    setTimeout(() => this.checkData(), this.options.checkPeriod*1000);
   }
 
   // @type Internal Function
