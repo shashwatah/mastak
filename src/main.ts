@@ -7,12 +7,13 @@ import {
   Errors,
   Request,
   ValueSet,
-  Options
+  Options,
+  OptionsInternal
 } from "./types/main.interfaces";
 
 export default class Mastak {
   private cache: Cache;
-  private options: Options;
+  private options: OptionsInternal;
 
   constructor(options?: Options) {
     this.cache = {};
@@ -34,8 +35,14 @@ export default class Mastak {
         let data;
         try {
           data = await this._processRequest(api.request, api.resProcessor);
-          this.cache[key] = api;
-          this.cache[key].value = data;
+          
+          let now = Date.now();
+          this.cache[key] = Object.assign({
+            setTime: now,
+            lastUpdate: now,
+            value: data,
+          }, api);
+
           resolve(this.cache[key]);
         } catch (err) {
           return reject(err);
@@ -76,7 +83,7 @@ export default class Mastak {
 
         if (updateNow) {
           let data = await this._processRequest(api.request, api.resProcessor);
-          this.cache[key] = api;
+          this.cache[key] = Object.assign(this.cache[key], api);
           this.cache[key].value = data;
         }
 
@@ -120,8 +127,13 @@ export default class Mastak {
             apis[i].request,
             apis[i].resProcessor
           );
-          processedAPIs[i] = apis[i];
-          processedAPIs[i].value = data;
+
+          let now = Date.now();
+          processedAPIs[i] = Object.assign({
+              setTime: now,
+              lastUpdate: now,
+              value: data
+          }, apis[i]);
         } catch (err) {
           return reject(err);
         }

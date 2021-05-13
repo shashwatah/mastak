@@ -21,8 +21,9 @@ export interface InputAPI extends ValueSet{
 }
 
 export interface CachedAPI extends InputAPI {
-  setTime?: number;
-  value?: any;
+  setTime: number;
+  lastUpdate: number,
+  value: any;
 }
 
 export interface Cache {
@@ -40,3 +41,9 @@ export interface Options {
     checkPeriod?: number;
 }
 
+export interface OptionsInternal {
+    stdTTL: number;
+    autoUpdate: boolean, 
+    updateInterval: number,
+    checkPeriod: number;
+}
