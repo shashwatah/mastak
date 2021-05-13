@@ -4,7 +4,7 @@
     [✓] 3. delete(): Delete a cached API based on the key entered
     [✓] 4. update(): Update a cached API 
 
-[] 2. Secondary Functions 
+[✓] 2. Secondary Functions 
     [✓] 1. setMulti(): Set multiple values in cache 
     [✓] 2. getMulti(): Get the current value of multiple keys from the cache
     [✓] 3. deleteMulti(): Delete multiple cached APIs
@@ -13,21 +13,19 @@
     [✓] 6. has(): Check if the cache has a key
     [✓] 7. keys(): Return all the keys currently stored in the cache
 
-[] 3. Core Functions 
-    [] 1. updateData()
-    [] 2. expire()
+[✓] 3. Core Functions 
+    [✓] 1. checkData()
 
-[] 4. Internal Functions 
+[✓] 4. Internal Functions 
     [✓] 1. _checkResponseStatus(): Check the response status of a request made
     [✓] 2. _generateError(): Generate Errors with messages based on error templates
     [✓] 3. _processRequest(): Send the request and process the response
-    [] 4. _checkValues()
 
 
 [] 5. Misc. 
-    [] 1. Options for the module
+    [✓] 1. Options for the module
     [] 2. Better error templates
-    [] 3. TTL and Update loops
+    [✓] 3. TTL and Update loops
     [✓] 4. More organised and uniform format of output for each function 
           whether it be valid response or errors
     [✓] 5. Replace Promises
