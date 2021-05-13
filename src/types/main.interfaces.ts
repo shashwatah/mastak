@@ -1,5 +1,5 @@
 export interface ValueSet {
-    [key: string]: any;
+  [key: string]: any;
 }
 
 export interface Request {
@@ -13,7 +13,7 @@ export interface Request {
   };
 }
 
-export interface InputAPI extends ValueSet{
+export interface InputAPI extends ValueSet {
   request: Request;
   resProcessor?: any;
   updateInterval?: number;
@@ -22,7 +22,7 @@ export interface InputAPI extends ValueSet{
 
 export interface CachedAPI extends InputAPI {
   setTime: number;
-  lastUpdate: number,
+  lastUpdate: number;
   value: any;
 }
 
@@ -35,15 +35,15 @@ export interface Errors {
 }
 
 export interface Options {
-    stdTTL?: number;
-    autoUpdate?: boolean, 
-    updateInterval?: number,
-    checkPeriod?: number;
+  stdTTL?: number;
+  autoUpdate?: boolean;
+  updateInterval?: number;
+  checkPeriod?: number;
 }
 
 export interface OptionsInternal {
-    stdTTL: number;
-    autoUpdate: boolean, 
-    updateInterval: number,
-    checkPeriod: number;
+  stdTTL: number;
+  autoUpdate: boolean;
+  updateInterval: number;
+  checkPeriod: number;
 }
