@@ -2,6 +2,7 @@ import fetch, { Response } from "node-fetch";
 
 import {
   Cache,
+  InputAPI,
   CachedAPI,
   Errors,
   Request,
@@ -17,13 +18,17 @@ export default class Mastak {
     this.cache = {};
     this.options = Object.assign({
       stdTTL: 0,
-      checkPeriod: 300 // in seconds
+      autoUpdate: true,
+      updateInterval: 3600, // 1 hour in seconds
+      checkPeriod: 300 // 5 mins in seconds
     }, options)
+
+    this.checkData();
   }
 
   // @type Primary Function
   // @desc Set a value in cache after making the request specified
-  set(key: string, api: CachedAPI): Promise<CachedAPI> {
+  set(key: string, api: InputAPI): Promise<CachedAPI> {
     return new Promise(async (resolve, reject) => {
       if (!(key in this.cache)) {
         let data;
@@ -64,7 +69,7 @@ export default class Mastak {
 
   // @type Primary Function
   // @desc Update a cached API
-  update(key: string, api: CachedAPI, updateNow: boolean): Promise<CachedAPI> {
+  update(key: string, api: InputAPI, updateNow: boolean): Promise<CachedAPI> {
     return new Promise(async (resolve, reject) => {
       if (key in this.cache) {
         Object.assign(this.cache[key], api)
@@ -87,7 +92,7 @@ export default class Mastak {
   // As of now this works perfectly fine but the code needs a refactor
   setMulti(
     keys: Array<string>,
-    apis: Array<CachedAPI>
+    apis: Array<InputAPI>
   ): Promise<Array<CachedAPI>> {
     return new Promise(async (resolve, reject) => {
       if (keys.length !== apis.length) {
@@ -198,6 +203,12 @@ export default class Mastak {
     return keys;
   }
 
+  // @type Core Function
+  // @desc Check all the data for TTL and Auto-Update, regularly
+  checkData(): void {
+
+  }
+
   // @type Internal Function
   // @desc Send the request and proecess the response
   _processRequest(request: Request, resProcessor?: any): Promise<any> {
@@ -247,7 +258,7 @@ export default class Mastak {
   // @desc Generate an error with message from an error template based
   // on the type provided
   _generateError(type: string, errorMessage: string): Error {
-    const errors: Errors= {
+    const errors: Errors = {
       BadRequest: "There's something wrong with the request",
       BadProcessor: "There's something wrong with the response processor",
       BadKey: "There's something wrong with the key",

@@ -13,11 +13,15 @@ export interface Request {
   };
 }
 
-export interface CachedAPI extends ValueSet{
+export interface InputAPI extends ValueSet{
   request: Request;
+  resProcessor?: any;
   updateInterval?: number;
   ttl?: number;
-  resProcessor?: any;
+}
+
+export interface CachedAPI extends InputAPI {
+  setTime?: number;
   value?: any;
 }
 
@@ -31,6 +35,8 @@ export interface Errors {
 
 export interface Options {
     stdTTL?: number;
+    autoUpdate?: boolean, 
+    updateInterval?: number,
     checkPeriod?: number;
 }
 
