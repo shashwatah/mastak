@@ -1,8 +1,26 @@
-export interface ValueSet {
+export interface StandardDataset {
   [key: string]: any;
 }
 
-export interface Request {
+export interface Errors {
+  [key: string]: string;
+}
+
+export interface Options extends StandardDataset {
+  stdTTL?: number;
+  autoUpdate?: boolean;
+  updateInterval?: number;
+  checkPeriod?: number;
+}
+
+export interface OptionsInternal extends StandardDataset {
+  stdTTL: number;
+  autoUpdate: boolean;
+  updateInterval: number;
+  checkPeriod: number;
+}
+
+export interface Request extends StandardDataset {
   url: string;
   method: string;
   body?: {
@@ -13,37 +31,19 @@ export interface Request {
   };
 }
 
-export interface InputAPI extends ValueSet {
+export interface CacheInput extends StandardDataset {
   request: Request;
   resProcessor?: any;
   updateInterval?: number;
   ttl?: number;
 }
 
-export interface CachedAPI extends InputAPI {
+export interface CacheUnit extends CacheInput {
   setTime: number;
   lastUpdate: number;
   value: any;
 }
 
 export interface Cache {
-  [key: string]: CachedAPI;
-}
-
-export interface Errors {
-  [key: string]: string;
-}
-
-export interface Options {
-  stdTTL?: number;
-  autoUpdate?: boolean;
-  updateInterval?: number;
-  checkPeriod?: number;
-}
-
-export interface OptionsInternal {
-  stdTTL: number;
-  autoUpdate: boolean;
-  updateInterval: number;
-  checkPeriod: number;
+  [key: string]: CacheUnit;
 }

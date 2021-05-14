@@ -1,14 +1,14 @@
 import fetch, { Response } from "node-fetch";
 
 import {
-  Cache,
-  InputAPI,
-  CachedAPI,
+  StandardDataset,
   Errors,
-  Request,
-  ValueSet,
   Options,
   OptionsInternal,
+  Request,
+  CacheInput,
+  CacheUnit,
+  Cache,
 } from "./types/main.interfaces";
 
 export default class Mastak {
@@ -32,7 +32,7 @@ export default class Mastak {
 
   // @type Primary Function
   // @desc Set a value in cache after making the request specified
-  set(key: string, api: InputAPI): Promise<CachedAPI> {
+  set(key: string, api: CacheInput): Promise<CacheUnit> {
     return new Promise(async (resolve, reject) => {
       if (!(key in this.cache)) {
         let data;
@@ -82,7 +82,7 @@ export default class Mastak {
 
   // @type Primary Function
   // @desc Update a cached API
-  update(key: string, api: InputAPI, updateNow: boolean): Promise<CachedAPI> {
+  update(key: string, api: CacheInput, updateNow: boolean): Promise<CacheUnit> {
     return new Promise(async (resolve, reject) => {
       if (key in this.cache) {
         Object.assign(this.cache[key], api);
@@ -91,6 +91,7 @@ export default class Mastak {
           let data = await this._processRequest(api.request, api.resProcessor);
           this.cache[key] = Object.assign(this.cache[key], api);
           this.cache[key].value = data;
+          this.cache[key].lastUpdate = Date.now();
         }
 
         resolve(this.cache[key]);
@@ -103,10 +104,7 @@ export default class Mastak {
   // @type Secondary Function
   // @desc Set multiple values in cache
   // As of now this works perfectly fine but the code needs a refactor
-  setMulti(
-    keys: Array<string>,
-    apis: Array<InputAPI>
-  ): Promise<Array<CachedAPI>> {
+  setMulti(keys: Array<string>, apis: Array<CacheInput>): Promise<Array<CacheUnit>> {
     return new Promise(async (resolve, reject) => {
       if (keys.length !== apis.length) {
         return reject(
@@ -125,7 +123,7 @@ export default class Mastak {
         }
       }
 
-      let processedAPIs: Array<CachedAPI> = [];
+      let processedAPIs: Array<CacheUnit> = [];
       for (const i in keys) {
         let data: any;
         try {
@@ -158,8 +156,8 @@ export default class Mastak {
 
   // @type Secondary Function
   // @desc Return current values for multiple keys
-  getMulti(keys: Array<string>): ValueSet {
-    let data: ValueSet = {};
+  getMulti(keys: Array<string>): StandardDataset {
+    let data: StandardDataset = {};
 
     for (const key of keys) {
       if (key in this.cache) {
@@ -190,7 +188,7 @@ export default class Mastak {
 
   // @type Secondary Function
   // @desc Delete a cached API and return its value
-  take(key: string): CachedAPI {
+  take(key: string): CacheUnit {
     if (key in this.cache) {
       let temp = this.cache[key];
       delete this.cache[key];
