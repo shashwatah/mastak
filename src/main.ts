@@ -55,7 +55,9 @@ export default class Mastak {
           return reject(err);
         }
       } else {
-        return reject(this._generateError("BadKey", `Key '${key}' already exists`));
+        return reject(
+          this._generateError("BadKey", `Key '${key}' already exists`)
+        );
       }
     });
   }
@@ -100,7 +102,9 @@ export default class Mastak {
 
         resolve(this.cache[key]);
       } else {
-        return reject(this._generateError("BadKey", `Key '${key}' does not exist`));
+        return reject(
+          this._generateError("BadKey", `Key '${key}' does not exist`)
+        );
       }
     });
   }
@@ -108,7 +112,10 @@ export default class Mastak {
   // @type Secondary Function
   // @desc Set multiple APIs or CacheUnits in the cache with arrays of keys and CacheInputs
   // @ret  Returns a promise that resolves with an array of proccessed CacheUnits or rejects an error
-  setMulti(keys: Array<string>, apis: Array<CacheInput>): Promise<Array<CacheUnit>> {
+  setMulti(
+    keys: Array<string>,
+    apis: Array<CacheInput>
+  ): Promise<Array<CacheUnit>> {
     return new Promise(async (resolve, reject) => {
       if (keys.length !== apis.length) {
         return reject(
