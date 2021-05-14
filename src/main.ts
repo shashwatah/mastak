@@ -31,7 +31,8 @@ export default class Mastak {
   }
 
   // @type Primary Function
-  // @desc Set a value in cache after making the request specified
+  // @desc Set an API or CacheUnit in the cache with the key provided
+  // @ret  Returns a promise that resolves with the entire CacheUnit stored against a key or rejects an error
   set(key: string, api: CacheInput): Promise<CacheUnit> {
     return new Promise(async (resolve, reject) => {
       if (!(key in this.cache)) {
@@ -60,7 +61,8 @@ export default class Mastak {
   }
 
   // @type Primary Function
-  // @desc Get the current value stored for an API
+  // @desc Get the currently stored value for an API with the key
+  // @ret  Returns the "value" for the CacheUnit or throws a BadKey error
   get(key: string): any {
     if (key in this.cache) {
       return this.cache[key].value;
@@ -70,7 +72,8 @@ export default class Mastak {
   }
 
   // @type Primary Function
-  // @desc Delete a cached API based on the key entered
+  // @desc Delete a CacheUnit with the key
+  // @ret  Returns boolean - true if successful or throws a BadKey error
   delete(key: string): boolean {
     if (key in this.cache) {
       delete this.cache[key];
@@ -81,7 +84,8 @@ export default class Mastak {
   }
 
   // @type Primary Function
-  // @desc Update a cached API
+  // @desc Update the data of a CacheUnit and updated its value if needed
+  // @ret  Returns a promise that resolves with the updated CacheUnit or rejects an error
   update(key: string, api: CacheInput, updateNow: boolean): Promise<CacheUnit> {
     return new Promise(async (resolve, reject) => {
       if (key in this.cache) {
@@ -102,8 +106,8 @@ export default class Mastak {
   }
 
   // @type Secondary Function
-  // @desc Set multiple values in cache
-  // As of now this works perfectly fine but the code needs a refactor
+  // @desc Set multiple APIs or CacheUnits in the cache with arrays of keys and CacheInputs
+  // @ret  Returns a promise that resolves with an array of proccessed CacheUnits or rejects an error
   setMulti(keys: Array<string>, apis: Array<CacheInput>): Promise<Array<CacheUnit>> {
     return new Promise(async (resolve, reject) => {
       if (keys.length !== apis.length) {
@@ -155,7 +159,8 @@ export default class Mastak {
   }
 
   // @type Secondary Function
-  // @desc Return current values for multiple keys
+  // @desc Get current value of multiple CacheUnits with an array of keys
+  // @ret  Returns an array of values or throws a BadKey error
   getMulti(keys: Array<string>): StandardDataset {
     let data: StandardDataset = {};
 
@@ -171,7 +176,8 @@ export default class Mastak {
   }
 
   // @type Secondary Function
-  // @desc Delete multiple apis from the cache
+  // @desc Delete multiple CacheUnits with an array of keys
+  // @ret  Returns boolean - true if successful or throws a BadKey error
   deleteMulti(keys: Array<string>): boolean {
     for (const key of keys) {
       if (!(key in this.cache)) {
@@ -187,7 +193,8 @@ export default class Mastak {
   }
 
   // @type Secondary Function
-  // @desc Delete a cached API and return its value
+  // @desc Delete a CacheUnit and return its value
+  // @ret  Returns the deleted CacheUnit or throws a BadKey error
   take(key: string): CacheUnit {
     if (key in this.cache) {
       let temp = this.cache[key];
@@ -199,14 +206,16 @@ export default class Mastak {
   }
 
   // @type Secondary Function
-  // @desc Delete all the date in the cache
+  // @desc Delete all the data in the cache
+  // @ret Returns boolean - true
   flush(): boolean {
     this.cache = {};
     return true;
   }
 
   // @type Secondary Function
-  // @desc Returns a boolean informing if the cache contains a specific key
+  // @desc Checks if the cache contains a key or not
+  // @ret  Returns boolean - true or false
   has(key: string): boolean {
     if (key in this.cache) {
       return true;
@@ -216,14 +225,16 @@ export default class Mastak {
   }
 
   // @type Secondary Function
-  // @desc Returns all the keys in the cache
+  // @desc Get all the keys currently stored in the cache
+  // @ret  Returns an array of strings(keys)
   keys(): Array<string> {
     const keys = Object.getOwnPropertyNames(this.cache);
     return keys;
   }
 
   // @type Core Function
-  // @desc Check all the data for TTL and Auto-Update, regularly
+  // @desc A function set on a regular setTimeout loop to check all the data for TTL and autoUpdate
+  // @ret  If a condition is met, logs the data in the console and continues with the loop, doesn't return anything
   checkData(): void {
     for (const key in this.cache) {
       let now = Date.now();
@@ -275,6 +286,7 @@ export default class Mastak {
 
   // @type Internal Function
   // @desc Send the request and proecess the response
+  // @ret  Returns a promise that resolves with the processed response or rejects an error
   _processRequest(request: Request, resProcessor?: any): Promise<any> {
     return new Promise(async (resolve, reject) => {
       let response = await fetch(request.url, {
@@ -310,6 +322,7 @@ export default class Mastak {
 
   // @type Internal Funciton
   // @desc Check the response status to throw an error if a necessary
+  // @ret  Returns the response as is or throws a BadRequest error
   _checkResponseStatus(res: Response): Response {
     if (res.ok) {
       return res;
@@ -319,8 +332,8 @@ export default class Mastak {
   }
 
   // @type Internal Function
-  // @desc Generate an error with message from an error template based
-  // on the type provided
+  // @desc Generate an error with message from an error template based on the type provided
+  // @ret  Returns the formed error
   _generateError(type: string, errorMessage: string): Error {
     const errors: Errors = {
       BadRequest: "There's something wrong with the request",
