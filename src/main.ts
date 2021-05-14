@@ -54,7 +54,7 @@ export default class Mastak {
           return reject(err);
         }
       } else {
-        return reject(this._generateError("BadKey", "Key already exists"));
+        return reject(this._generateError("BadKey", `Key '${key}' already exists`));
       }
     });
   }
@@ -65,7 +65,7 @@ export default class Mastak {
     if (key in this.cache) {
       return this.cache[key].value;
     } else {
-      throw this._generateError("BadKey", "Key does not exist");
+      throw this._generateError("BadKey", `Key '${key}' does not exist`);
     }
   }
 
@@ -76,7 +76,7 @@ export default class Mastak {
       delete this.cache[key];
       return true; // Might change this later on
     } else {
-      throw this._generateError("BadKey", "Key does not exist");
+      throw this._generateError("BadKey", `Key '${key}' does not exist`);
     }
   }
 
@@ -96,7 +96,7 @@ export default class Mastak {
 
         resolve(this.cache[key]);
       } else {
-        return reject(this._generateError("BadKey", "Key does not exist"));
+        return reject(this._generateError("BadKey", `Key '${key}' does not exist`));
       }
     });
   }
@@ -117,7 +117,7 @@ export default class Mastak {
           return reject(
             this._generateError(
               "BadKey",
-              `Key "${key}" already exists in the cache`
+              `Key '${key}' already exists in the cache`
             )
           );
         }
@@ -163,7 +163,7 @@ export default class Mastak {
       if (key in this.cache) {
         data[key] = this.cache[key].value;
       } else {
-        throw this._generateError("BadKey", `Key "${key}" does not exist`);
+        throw this._generateError("BadKey", `Key '${key}' does not exist`);
       }
     }
 
@@ -175,7 +175,7 @@ export default class Mastak {
   deleteMulti(keys: Array<string>): boolean {
     for (const key of keys) {
       if (!(key in this.cache)) {
-        throw this._generateError("BadKey", `Key ${key} does not exist`);
+        throw this._generateError("BadKey", `Key '${key}' does not exist`);
       }
     }
 
@@ -331,7 +331,7 @@ export default class Mastak {
 
     let error: Error = new Error();
     error.name = type;
-    error.message = `ERROR: ${type}: ${errors[type]}; info: ${errorMessage}`;
+    error.message = `ERROR: ${type}: ${errors[type]}; msg: ${errorMessage}`;
     return error;
   }
 }
