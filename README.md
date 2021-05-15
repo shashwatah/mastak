@@ -103,7 +103,7 @@ interface CacheInput {
 
 ### set()
 
-Set an API or CacheUnit in the cache with the key provided.<br>Returns a promise that resolves with the entire CacheUnit stored against a key or rejects an error.
+Set an API or `CacheUnit` in the cache with the key provided.<br>Returns a promise that resolves with the entire `CacheUnit` stored against a key or rejects an error.
 
 ```ts
 Mastak.set(key: string, api: CacheInput)
@@ -123,7 +123,7 @@ const request = {
     headers: {
         'Content-type': 'application/json; charset=UTF-8',
     }
-}
+};
 
 const api: CacheInput = {
     request: request,
@@ -137,27 +137,99 @@ const foo = async () => {
     } catch(err) {
         console.warn(err.message);
     }
-}
+};
+
+foo();
 ```
 
 <hr>
 
 ### get()
 
-Get the currently stored value for an API with the key.<br>Returns the "value" for the CacheUnit or throws a BadKey error.
+Get the currently stored value for an API with the key.<br>Returns the "value" for the `CacheUnit` or throws a `BadKey` error.
+
+```ts
+Mastak.get(key: string)
+```
 
 #### Example
 
 ```js
+try {
+    let response = await cache.get("JSONPlaceholder");
+    console.log("get()", response);
+} catch(err) {
+    console.warn(err.message);
+}  
+```
+
+<hr>
+
+### delete()
+
+Delete a `CacheUnit` with the key.<br>
+Returns *boolean* - *true* if successful or throws a `BadKey` error
+
+```ts
+Mastak.delete(key: string)
+```
+
+#### Example 
+
+```js 
+try {
+    let response = await cache.delete("JSONPlaceholder");
+    console.log("delete()", response);
+} catch(err) {
+    console.warn(err.message);
+}   
+```
+
+<hr>
+
+#### update() 
+
+Update the data of a `CacheUnit` and updated its value if needed.<br>
+Returns a promise that resolves with the updated `CacheUnit` or rejects an error.
+
+```ts
+Mastak.update(key: string, api: CacheInput, updateNow: boolean)
+```
+
+#### Example 
+
+```js
+const request2 = {
+    url: "https://jsonplaceholder.typicode.com/posts/2",
+    method: "PATCH",
+    body: {
+        title: 'foo',
+    },
+};
+
+const resProcessor2 = (data: any) => {
+    return data.userId;
+};
+
+const api2 = {
+    request: request2,
+    resProcessor: resProcessor2
+};
+
+
+const foo = async () => {
     try {
-        let response = await cache.get("JSONPlaceholder");
-        console.log("get()", response);
+        response = await cache.update("JSONPlaceholder", api2, true);
+        console.log("update()", response);
     } catch(err) {
         console.warn(err.message);
     }
-    
+};
+
+foo();
 ```
 
+<hr>
 
 ## Authors
 - [Araekiel](https://www.github.com/Araekiel)
