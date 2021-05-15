@@ -24,7 +24,10 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a> for <a href=
   <a href="#description">Description</a> •
   <a href="#installation">Installation</a> •
   <a href="#initialization">Initialization</a> •
-  <a href="#usage">Usage</a>
+  <a href="#usage">Usage</a> •
+  <a href="#contribution">Contribution</a> •
+  <a href="#authors">Authors</a> •
+  <a href="#license">License</a> •
 </p>
 
 ## Description
@@ -315,7 +318,7 @@ try {
 
 <hr>
 
-#### deleteMulti()
+### deleteMulti()
 
 Delete multiple `CacheUnit`s with an array of keys.<br>
 Returns *boolean* - *true* if successful or throws a `BadKey` error.
@@ -337,7 +340,7 @@ try {
 
 <hr>
 
-#### take()
+### take()
 
 Delete a `CacheUnit` and return its value.<br>
 Returns the deleted `CacheUnit` or throws a `BadKey` error.
@@ -407,6 +410,13 @@ Mastak.keys()
 ```js
 cache.keys();
 ```
+
+<hr>
+
+## Contribution
+
+Fork the repository and open a pull request to contribute.
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## Authors
 - [Araekiel](https://www.github.com/Araekiel)
