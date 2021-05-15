@@ -24,6 +24,7 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a> for <a href=
   <a href="#description">Description</a> •
   <a href="#installation">Installation</a> •
   <a href="#initialization">Initialization</a> •
+  <a href="#usage">Usage</a>
 </p>
 
 ## Description
@@ -165,28 +166,6 @@ try {
 
 <hr>
 
-### delete()
-
-Delete a `CacheUnit` with the key.<br>
-Returns *boolean* - *true* if successful or throws a `BadKey` error
-
-```ts
-Mastak.delete(key: string)
-```
-
-#### Example 
-
-```js 
-try {
-    let response = await cache.delete("JSONPlaceholder");
-    console.log("delete()", response);
-} catch(err) {
-    console.warn(err.message);
-}   
-```
-
-<hr>
-
 #### update() 
 
 Update the data of a `CacheUnit` and updated its value if needed.<br>
@@ -221,6 +200,87 @@ const foo = async () => {
     try {
         response = await cache.update("JSONPlaceholder", api2, true);
         console.log("update()", response);
+    } catch(err) {
+        console.warn(err.message);
+    }
+};
+
+foo();
+```
+
+<hr>
+
+### delete()
+
+Delete a `CacheUnit` with the key.<br>
+Returns *boolean* - *true* if successful or throws a `BadKey` error
+
+```ts
+Mastak.delete(key: string)
+```
+
+#### Example 
+
+```js 
+try {
+    let response = await cache.delete("JSONPlaceholder");
+    console.log("delete()", response);
+} catch(err) {
+    console.warn(err.message);
+}   
+```
+
+<hr>
+
+### setMulti()
+
+Set multiple APIs or `CacheUnit`s in the cache with arrays of keys and `CacheInput`s.<br>
+Returns a promise that resolves with an array of proccessed `CacheUnit`s or rejects an error.
+
+```ts
+Mastak.setMulti(keys: Array<string>, apis: Array<CacheInput>)
+```
+
+```js
+const request = {
+    url: "https://jsonplaceholder.typicode.com/posts",
+    method: "POST",
+    body: {
+        title: 'foo',
+        body: 'bar',
+        userId: 1,
+    },
+    headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+    }
+};
+
+const request2 = {
+    url: "https://jsonplaceholder.typicode.com/posts/2",
+    method: "PATCH",
+    body: {
+        title: 'foo',
+    },
+};
+
+const resProcessor2 = (data: any) => {
+    return data.userId;
+};
+
+const api: CacheInput = {
+    request: request,
+    ttl: 1800
+};
+
+const api2 = {
+    request: request2,
+    resProcessor: resProcessor2
+};
+
+const foo = async () => {
+    try {
+        let response = await cache.setMulti(["JSONPlaceholder", "JSONPlaceholder2"], [api, api2]);
+        console.log("setMulti()", response);
     } catch(err) {
         console.warn(err.message);
     }
