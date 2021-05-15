@@ -23,12 +23,12 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a> for <a href=
 <p align="center">
   <a href="#description">Description</a> •
   <a href="#installation">Installation</a> •
-  <a href="#usage">Usage</a> •
+  <a href="#initialization">Initialization</a> •
 </p>
 
 ## Description
 
-An npm module to automate the regular processing and caching of responses from APIs. With a caching mechanism inspired by [node-cache](https://www.npmjs.com/package/node-cache), this module has all the standard interface methods to interact with the in-memory cache.<br/><br/>
+An npm module to automate the regular processing and caching of responses from APIs. With a caching mechanism inspired by [node-cache](https://www.npmjs.com/package/node-cache), this module has all the standard interface methods to interact with the in-memory cache.<br>
 Mastak makes requests using [node-fetch](https://www.npmjs.com/package/node-fetch) and processes the response based on the resProcessor function provided by the user. Each key gets a timeout(ttl) and an updateInterval(if autoUpdate is true). 
 
 ## Installation
@@ -37,9 +37,7 @@ Mastak makes requests using [node-fetch](https://www.npmjs.com/package/node-fetc
 $ npm install mastak --save
 ```
 
-## Usage
-
-### Initialization
+## Initialization
 
 ```js
 const Mastak = require("mastak");
@@ -50,7 +48,7 @@ const cache = new Mastak();
 - `stdTTL`: *(default: `0`)* - the standard timeout(in seconds) for each element of the cache, `0` = infinite.
 - `autoUpdate`: *(default: `true`)* - boolean flag that states if each element in the cache has to be regularly updated or not.
 - `updateInterval`: *(default: `3600(1 hr in secs)`* - the standard interval(in seconds) over which each element in the cache has to be updated
-- `checkPeriod`: *(default: `600`(10 min in secs)* - the regular interval(in seconds) over which the internal *checkData()* method will check each element for timeout and autoUpdate.
+- `checkPeriod`: *(default: `600(10 min in secs)`* - the regular interval(in seconds) over which the internal *checkData()* method will check each element for timeout and autoUpdate.
 
 #### Example
 
