@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "An in-memory cache module for Node.js",
   "main": "lib/index.js",
-  "types": "lib",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc -p ."
   },
