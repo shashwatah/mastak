@@ -73,7 +73,7 @@ Take a look at [src/types/main.interfaces.ts](https://github.com/Araekiel/mastak
 
 `Request` defines the data needed to form a valid request that can be sent using `node-fetch`.
 
-```js
+```ts
 interface Request {
     url: string; // url for the api
     method: string; // http method to be used
@@ -92,7 +92,7 @@ interface Request {
 
 `CacheInput` defines all the data that needs to be input to set or update an API.
 
-```js
+```ts
 interface CacheInput {
     request: Request; 
     resProcessor?: any; // a function that processes the response recieved
