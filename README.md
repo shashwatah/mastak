@@ -27,7 +27,7 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a> for <a href=
   <a href="#usage">Usage</a> •
   <a href="#contribution">Contribution</a> •
   <a href="#authors">Authors</a> •
-  <a href="#license">License</a> •
+  <a href="#license">License</a>
 </p>
 
 ## Description
@@ -146,6 +146,19 @@ const foo = async () => {
 foo();
 ```
 
+#### Response 
+
+```js
+set() { setTime: 1621113414640,
+lastUpdate: 1621113414640,
+value: { title: 'foo', body: 'bar', userId: 1, id: 101 },
+request:
+{ url: 'https://jsonplaceholder.typicode.com/posts',
+method: 'POST',
+body: { title: 'foo', body: 'bar', userId: 1 },
+headers: { 'Content-type': 'application/json; charset=UTF-8' } } }
+```
+
 <hr>
 
 ### get()
@@ -165,6 +178,12 @@ try {
 } catch(err) {
     console.warn(err.message);
 }  
+```
+
+#### Response 
+
+```js
+get() { title: 'foo', body: 'bar', userId: 1, id: 101 }
 ```
 
 <hr>
@@ -211,6 +230,19 @@ const foo = async () => {
 foo();
 ```
 
+#### Response
+
+```js
+update() { setTime: 1621113648549,
+lastUpdate: 1621113649233,
+value: 1,
+request:
+{ url: 'https://jsonplaceholder.typicode.com/posts/2',
+    method: 'PATCH',
+    body: { title: 'foo' } },
+resProcessor: [Function: something2] }
+```
+
 <hr>
 
 ### delete()
@@ -231,6 +263,12 @@ try {
 } catch(err) {
     console.warn(err.message);
 }   
+```
+
+#### Response 
+
+```js
+delete() true
 ```
 
 <hr>
@@ -294,6 +332,27 @@ const foo = async () => {
 foo();
 ```
 
+#### Response 
+
+```js
+setMulti() [ { setTime: 1621113734595,
+lastUpdate: 1621113734595,
+value: { title: 'foo', body: 'bar', userId: 1, id: 101 },
+request:
+    { url: 'https://jsonplaceholder.typicode.com/posts',
+    method: 'POST',
+    body: [Object],
+    headers: [Object] } },
+{ setTime: 1621113735169,
+lastUpdate: 1621113735169,
+value: 1,
+request:
+    { url: 'https://jsonplaceholder.typicode.com/posts/2',
+    method: 'PATCH',
+    body: [Object] },
+resProcessor: [Function: something2] } ]
+```
+
 <hr>
 
 ### getMulti() 
@@ -314,6 +373,58 @@ try {
 } catch(err) {
     console.warn(err.message);
 } 
+```
+
+#### Response 
+
+```js
+getMulti() { JSONPlaceholder: { title: 'foo', body: 'bar', userId: 1, id: 101 },
+  JSONPlaceholder2: 1 }
+```
+<hr>
+
+### has()
+
+Checks if the cache contains a key or not.<br>
+Returns *boolean* - *true* or *false*
+
+```ts
+Mastak.has(key: string)
+```
+
+#### Example
+
+```js
+cache.has("JSONPlaceholder");
+```
+
+#### Response 
+
+```js
+has() true
+```
+
+<hr>
+
+### keys()
+
+Get all the keys currently stored in the cache.<br>
+Returns an array of *strings(keys)*.
+
+```ts
+Mastak.keys()
+```
+
+#### Example
+
+```js
+cache.keys();
+```
+
+### Response 
+
+```js
+keys() ["JSONPlaceholder", "JSONPlaceholder2"]
 ```
 
 <hr>
@@ -338,6 +449,12 @@ try {
 } 
 ```
 
+#### Response
+
+```js
+deleteMulti() true
+```
+
 <hr>
 
 ### take()
@@ -360,6 +477,19 @@ try {
 } 
 ```
 
+#### Response
+
+```js
+take() { setTime: 1621113915875,
+lastUpdate: 1621113915875,
+value: { title: 'foo', body: 'bar', userId: 1, id: 101 },
+request:
+{ url: 'https://jsonplaceholder.typicode.com/posts',
+    method: 'POST',
+    body: { title: 'foo', body: 'bar', userId: 1 },
+    headers: { 'Content-type': 'application/json; charset=UTF-8' } } }
+```
+
 <hr>
 
 ### flush()
@@ -377,38 +507,10 @@ Mastak.flush()
 cache.flush();
 ```
 
-<hr>
-
-### has()
-
-Checks if the cache contains a key or not.<br>
-Returns *boolean* - *true* or *false*
-
-```ts
-Mastak.has(key: string)
-```
-
-#### Example
+#### Response 
 
 ```js
-cache.has("JSONPlaceholder");
-```
-
-<hr>
-
-### keys()
-
-Get all the keys currently stored in the cache.<br>
-Returns an array of *strings(keys)*.
-
-```ts
-Mastak.keys()
-```
-
-#### Example
-
-```js
-cache.keys();
+flush() true
 ```
 
 <hr>
