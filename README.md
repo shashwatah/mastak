@@ -29,7 +29,7 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a> for <a href=
 ## Description
 
 An npm module to automate the regular processing and caching of responses from APIs. With a caching mechanism inspired by [node-cache](https://www.npmjs.com/package/node-cache), this module has all the standard interface methods to interact with the in-memory cache.<br>
-Mastak makes requests using [node-fetch](https://www.npmjs.com/package/node-fetch) and processes the response based on the resProcessor function provided by the user. Each key gets a timeout(ttl) and an updateInterval(if autoUpdate is true). 
+Mastak makes requests using [node-fetch](https://www.npmjs.com/package/node-fetch) and processes the response based on the `resProcessor()` function provided by the user. Each key gets a `timeout(ttl)` and an `updateInterval`(if `autoUpdate` is true). 
 
 ## Installation
 
@@ -59,6 +59,44 @@ const cache = new Mastak({
     updateInterval: 7200
 });
 ```
+
+## Types
+
+There are 2 types/interfaces that a user has to take into account when using Mastak, i.e. `Request` & `CacheInput`
+
+### Request
+
+`Request` defines the data needed to form a valid request that can be sent using `node-fetch`.
+
+```ts
+interface Request {
+    url: string; // url for the api
+    method: string; // http method to be used
+    body?: {
+      [key: string]: any; // body for the request
+    };
+    headers?: {
+      [key: string]: string; // headers 
+    };
+}
+```
+
+> ?: these parameters are not required. 
+
+### CacheInput 
+
+`CacheInput` defines all the data that needs to be input to set aur update an API.
+
+```ts
+interface CacheInput {
+  request: Request; 
+  resProcessor?: any; // a function that processes the response recieved
+  updateInterval?: number; // the interval over which the API needs to be updated
+  ttl?: number; // the timeout for the API
+}
+```
+
+> ?: these parameters are not required. 
 
 ## Usage
 
