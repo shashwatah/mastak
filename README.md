@@ -166,7 +166,7 @@ try {
 
 <hr>
 
-#### update() 
+### update() 
 
 Update the data of a `CacheUnit` and updated its value if needed.<br>
 Returns a promise that resolves with the updated `CacheUnit` or rejects an error.
@@ -241,6 +241,8 @@ Returns a promise that resolves with an array of proccessed `CacheUnit`s or reje
 Mastak.setMulti(keys: Array<string>, apis: Array<CacheInput>)
 ```
 
+#### Example
+
 ```js
 const request = {
     url: "https://jsonplaceholder.typicode.com/posts",
@@ -290,6 +292,121 @@ foo();
 ```
 
 <hr>
+
+### getMulti() 
+
+Get current value of multiple `CacheUnit`s with an array of keys.<br>
+Returns an array of values or throws a `BadKey` error.
+
+```ts
+Mastak.getMulti(keys: Array<string>)
+```
+
+#### Example
+
+```js
+try {
+    let response = cache.getMulti(["JSONPlaceholder", "JSONPlaceholder2"]);
+    console.log("getMulti()", response);
+} catch(err) {
+    console.warn(err.message);
+} 
+```
+
+<hr>
+
+#### deleteMulti()
+
+Delete multiple `CacheUnit`s with an array of keys.<br>
+Returns *boolean* - *true* if successful or throws a `BadKey` error.
+
+```ts
+Mastak.deleteMulti(keys: Array<string>)
+```
+
+#### Example
+
+```js
+try {
+    let response = cache.deleteMulti(["JSONPlaceholder", "JSONPlaceholder2"]);
+    console.log("deleteMulti()", response);
+} catch(err) {
+    console.warn(err.message);
+} 
+```
+
+<hr>
+
+#### take()
+
+Delete a `CacheUnit` and return its value.<br>
+Returns the deleted `CacheUnit` or throws a `BadKey` error.
+
+```ts
+Mastak.take(key: string)
+```
+
+#### Example 
+
+```js
+try {
+    let response = cache.take("JSONPlaceholder");
+    console.log("take()", response);
+} catch(err) {
+    console.warn(err.message);
+} 
+```
+
+<hr>
+
+### flush()
+
+Delete all the data in the cache.<br>
+Returns *boolean* - *true*.
+
+```ts
+Mastak.flush()
+```
+
+#### Example 
+
+```js
+cache.flush();
+```
+
+<hr>
+
+### has()
+
+Checks if the cache contains a key or not.<br>
+Returns *boolean* - *true* or *false*
+
+```ts
+Mastak.has(key: string)
+```
+
+#### Example
+
+```js
+cache.has("JSONPlaceholder");
+```
+
+<hr>
+
+### keys()
+
+Get all the keys currently stored in the cache.<br>
+Returns an array of *strings(keys)*.
+
+```ts
+Mastak.keys()
+```
+
+#### Example
+
+```js
+cache.keys();
+```
 
 ## Authors
 - [Araekiel](https://www.github.com/Araekiel)

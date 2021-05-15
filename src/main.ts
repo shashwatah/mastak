@@ -214,7 +214,7 @@ export default class Mastak {
 
   // @type Secondary Function
   // @desc Delete all the data in the cache
-  // @ret Returns boolean - true
+  // @ret  Returns boolean - true
   flush(): boolean {
     this.cache = {};
     return true;
