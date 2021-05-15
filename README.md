@@ -81,11 +81,11 @@ interface Request {
 }
 ```
 
-> ?: these parameters are not required. 
+> ? - parameter is not required.
 
 ### CacheInput 
 
-`CacheInput` defines all the data that needs to be input to set aur update an API.
+`CacheInput` defines all the data that needs to be input to set or update an API.
 
 ```ts
 interface CacheInput {
@@ -96,15 +96,48 @@ interface CacheInput {
 }
 ```
 
-> ?: these parameters are not required. 
+> ? -  parameter is not required. 
 
 ## Usage
 
 ### set(): 
 
-Set an API or CacheUnit in the cache with the key provided.
+Set an API or CacheUnit in the cache with the key provided.<br>Returns a promise that resolves with the entire CacheUnit stored against a key or rejects an error.
 
+```ts
+Mastak.set(key: string, api: CacheInput)
+```
 
+#### Example
+
+```js
+const request = {
+    url: "https://jsonplaceholder.typicode.com/posts",
+    method: "POST",
+    body: {
+        title: 'foo',
+        body: 'bar',
+        userId: 1,
+    },
+    headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+    }
+}
+
+const api: CacheInput = {
+    request: request,
+    ttl: 1800
+};
+
+const foo = async () => {
+    try {
+        response = await cache.set("JSONPlaceholder", api);
+        console.log("set()", response);
+    } catch(err) {
+        console.warn(err.message);
+    }
+}
+```
 
 ## Authors
 - [Araekiel](https://www.github.com/Araekiel)
