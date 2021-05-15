@@ -73,7 +73,7 @@ Take a look at [src/types/main.interfaces.ts](https://github.com/Araekiel/mastak
 
 `Request` defines the data needed to form a valid request that can be sent using `node-fetch`.
 
-```ts
+```js
 interface Request {
     url: string; // url for the api
     method: string; // http method to be used
@@ -92,7 +92,7 @@ interface Request {
 
 `CacheInput` defines all the data that needs to be input to set or update an API.
 
-```ts
+```js
 interface CacheInput {
     request: Request; 
     resProcessor?: any; // a function that processes the response recieved
@@ -109,7 +109,7 @@ interface CacheInput {
 
 Set an API or `CacheUnit` in the cache with the key provided.<br>Returns a promise that resolves with the entire `CacheUnit` stored against a key or rejects an error.
 
-```ts
+```js
 Mastak.set(key: string, api: CacheInput)
 ```
 
@@ -165,7 +165,7 @@ headers: { 'Content-type': 'application/json; charset=UTF-8' } } }
 
 Get the currently stored value for an API with the key.<br>Returns the "value" for the `CacheUnit` or throws a `BadKey` error.
 
-```ts
+```js
 Mastak.get(key: string)
 ```
 
@@ -193,7 +193,7 @@ get() { title: 'foo', body: 'bar', userId: 1, id: 101 }
 Update the data of a `CacheUnit` and updated its value if needed.<br>
 Returns a promise that resolves with the updated `CacheUnit` or rejects an error.
 
-```ts
+```js
 Mastak.update(key: string, api: CacheInput, updateNow: boolean)
 ```
 
@@ -250,7 +250,7 @@ resProcessor: [Function: something2] }
 Delete a `CacheUnit` with the key.<br>
 Returns *boolean* - *true* if successful or throws a `BadKey` error
 
-```ts
+```js
 Mastak.delete(key: string)
 ```
 
@@ -278,7 +278,7 @@ delete() true
 Set multiple APIs or `CacheUnit`s in the cache with arrays of keys and `CacheInput`s.<br>
 Returns a promise that resolves with an array of proccessed `CacheUnit`s or rejects an error.
 
-```ts
+```js
 Mastak.setMulti(keys: Array<string>, apis: Array<CacheInput>)
 ```
 
@@ -360,7 +360,7 @@ resProcessor: [Function: something2] } ]
 Get current value of multiple `CacheUnit`s with an array of keys.<br>
 Returns an array of values or throws a `BadKey` error.
 
-```ts
+```js
 Mastak.getMulti(keys: Array<string>)
 ```
 
@@ -388,7 +388,7 @@ getMulti() { JSONPlaceholder: { title: 'foo', body: 'bar', userId: 1, id: 101 },
 Checks if the cache contains a key or not.<br>
 Returns *boolean* - *true* or *false*
 
-```ts
+```js
 Mastak.has(key: string)
 ```
 
@@ -411,7 +411,7 @@ has() true
 Get all the keys currently stored in the cache.<br>
 Returns an array of *strings(keys)*.
 
-```ts
+```js
 Mastak.keys()
 ```
 
@@ -434,7 +434,7 @@ keys() ["JSONPlaceholder", "JSONPlaceholder2"]
 Delete multiple `CacheUnit`s with an array of keys.<br>
 Returns *boolean* - *true* if successful or throws a `BadKey` error.
 
-```ts
+```js
 Mastak.deleteMulti(keys: Array<string>)
 ```
 
@@ -462,7 +462,7 @@ deleteMulti() true
 Delete a `CacheUnit` and return its value.<br>
 Returns the deleted `CacheUnit` or throws a `BadKey` error.
 
-```ts
+```js
 Mastak.take(key: string)
 ```
 
@@ -497,7 +497,7 @@ request:
 Delete all the data in the cache.<br>
 Returns *boolean* - *true*.
 
-```ts
+```js
 Mastak.flush()
 ```
 
