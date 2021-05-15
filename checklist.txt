@@ -44,3 +44,6 @@ TO-DO
     comprehensive
 -   comprehensive README and logo
 -   publish package
+
+
+// setMulti
