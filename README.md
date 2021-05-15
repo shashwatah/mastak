@@ -28,7 +28,7 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a> for <a href=
 
 ## Description
 
-An npm module to automate the regular processing and caching of responses from APIs. With a caching mechanism inspired by [node-cache](https://www.npmjs.com/package/node-cache), this module has all the standard interface methods to interact with the in-memory cache.<br>
+An npm module to automate the regular processing and caching of responses from APIs. With a caching mechanism inspired by [node-cache](https://www.npmjs.com/package/node-cache), this module has all the standard interface methods to interact with the in-memory cache.<br/><br/>
 Mastak makes requests using [node-fetch](https://www.npmjs.com/package/node-fetch) and processes the response based on the resProcessor function provided by the user. Each key gets a timeout(ttl) and an updateInterval(if autoUpdate is true). 
 
 ## Installation
