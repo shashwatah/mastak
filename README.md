@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <!-- <a href="https://gitwiz.herokuapp.com"><img src="https://github.com/Araekiel/gitwiz/blob/master/src/public/images/png/icon.png" alt="GitWiz" width="200"></a> -->
+  <a href="#"><img src="https://github.com/Araekiel/mastak/blob/master/assets/logo/mastak.png" alt="Mastak" width="200"></a>
   <br>
   Mastak    
   <br>
@@ -59,6 +59,13 @@ const cache = new Mastak({
     updateInterval: 7200
 });
 ```
+
+## Usage
+
+### set(): 
+
+Set an API or CacheUnit in the cache with the key provided.
+
 
 
 ## Authors
