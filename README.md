@@ -62,7 +62,8 @@ const cache = new Mastak({
 
 ## Types
 
-There are 2 types/interfaces that a user has to take into account when using Mastak, i.e. `Request` & `CacheInput`
+There are 2 types/interfaces that a user has to take into account when using Mastak, i.e. `Request` & `CacheInput`.<br><br>
+Take a look at [src/types/main.interfaces.ts](https://github.com/Araekiel/mastak/blob/master/src/types/main.interfaces.ts) to see all the defined interfaces.
 
 ### Request
 
@@ -144,6 +145,8 @@ const foo = async () => {
 ### get()
 
 Get the currently stored value for an API with the key.<br>Returns the "value" for the CacheUnit or throws a BadKey error.
+
+#### Example
 
 ```js
     try {
