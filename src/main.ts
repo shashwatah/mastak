@@ -22,7 +22,7 @@ export default class Mastak {
         stdTTL: 0,
         autoUpdate: true,
         updateInterval: 3600, // 1 hour in seconds
-        checkPeriod: 300, // 5 mins in seconds
+        checkPeriod: 600, // 10 mins in seconds
       },
       options
     );
