@@ -89,10 +89,10 @@ interface Request {
 
 ```ts
 interface CacheInput {
-  request: Request; 
-  resProcessor?: any; // a function that processes the response recieved
-  updateInterval?: number; // the interval over which the API needs to be updated
-  ttl?: number; // the timeout for the API
+    request: Request; 
+    resProcessor?: any; // a function that processes the response recieved
+    updateInterval?: number; // the interval over which the API needs to be updated
+    ttl?: number; // the timeout for the API
 }
 ```
 
@@ -100,7 +100,7 @@ interface CacheInput {
 
 ## Usage
 
-### set(): 
+### set()
 
 Set an API or CacheUnit in the cache with the key provided.<br>Returns a promise that resolves with the entire CacheUnit stored against a key or rejects an error.
 
@@ -131,13 +131,30 @@ const api: CacheInput = {
 
 const foo = async () => {
     try {
-        response = await cache.set("JSONPlaceholder", api);
+        let response = await cache.set("JSONPlaceholder", api);
         console.log("set()", response);
     } catch(err) {
         console.warn(err.message);
     }
 }
 ```
+
+<hr>
+
+### get()
+
+Get the currently stored value for an API with the key.<br>Returns the "value" for the CacheUnit or throws a BadKey error.
+
+```js
+    try {
+        let response = await cache.get("JSONPlaceholder");
+        console.log("get()", response);
+    } catch(err) {
+        console.warn(err.message);
+    }
+    
+```
+
 
 ## Authors
 - [Araekiel](https://www.github.com/Araekiel)
