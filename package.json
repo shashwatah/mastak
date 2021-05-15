@@ -1,7 +1,7 @@
 {
   "name": "mastak",
   "version": "1.0.0",
-  "description": "An in-memory cache module for Node.js",
+  "description": "An npm module for in-memory automated API caching.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Araekiel/silo.git"
+    "url": "git+https://github.com/Araekiel/mastak.git"
   },
   "author": "Araekiel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Araekiel/silo/issues"
+    "url": "https://github.com/Araekiel/mastak/issues"
   },
-  "homepage": "https://github.com/Araekiel/silo#readme",
+  "homepage": "https://github.com/Araekiel/mastak#readme",
   "dependencies": {
     "node-fetch": "^2.6.1"
   },
