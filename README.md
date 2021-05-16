@@ -51,8 +51,8 @@ const cache = new Mastak();
 
 - `stdTTL`: *(default: `0`)* - the standard timeout(in seconds) for each element of the cache, `0` = infinite.
 - `autoUpdate`: *(default: `true`)* - boolean flag that states if each element in the cache has to be regularly updated or not.
-- `updateInterval`: *(default: `3600(1 hr in secs)`* - the standard interval(in seconds) over which each element in the cache has to be updated
-- `checkPeriod`: *(default: `600(10 min in secs)`* - the regular interval(in seconds) over which the internal *checkData()* method will check each element for timeout and autoUpdate.
+- `updateInterval`: *(default: `3600(1 hr in secs)`* - the standard interval(in seconds) at  which each element in the cache has to be updated
+- `checkPeriod`: *(default: `600(10 min in secs)`* - the regular interval(in seconds) at which the internal *checkData()* method will check each element for timeout and autoUpdate.
 
 #### Example
 
@@ -66,8 +66,7 @@ const cache = new Mastak({
 
 ## Types
 
-There are 2 types/interfaces that a user has to take into account when using Mastak, i.e. `Request` & `CacheInput`.<br><br>
-Take a look at [src/types/main.interfaces.ts](https://github.com/Araekiel/mastak/blob/master/src/types/main.interfaces.ts) to see all the defined interfaces.
+There are 2 types/interfaces that a user has to take into account when using Mastak, i.e. `Request` & `CacheInput`. These interfaces define the format of input that is expected from the user.
 
 ### Request
 
@@ -102,6 +101,8 @@ interface CacheInput {
 ```
 
 > ? -  parameter is not required. 
+
+Take a look at [src/types/main.interfaces.ts](https://github.com/Araekiel/mastak/blob/master/src/types/main.interfaces.ts) to see all the defined interfaces.
 
 ## Usage
 
