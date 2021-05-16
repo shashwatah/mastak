@@ -7,9 +7,9 @@
 </h1>
 
 <h4 align="center">
-An npm module for in-memory automated API caching.
+An <a href="https://www.npmjs.com/">npm</a> module for in-memory automated API caching.
 <br/>
-Built with <a href="https://www.typescriptlang.org/">TypeScript</a> for <a href="https://nodejs.org/en/">Node.js</a>.
+Built with <a href="https://www.typescriptlang.org/">TypeScript</a>.
 </h4>
 
 <p align="center">
@@ -21,7 +21,7 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a> for <a href=
 </p>
 
 <p align="center">
-  <a href="#description">Description</a> •
+  <a href="#about">About</a> •
   <a href="#installation">Installation</a> •
   <a href="#initialization">Initialization</a> •
   <a href="#types">Types</a> •
@@ -31,9 +31,9 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a> for <a href=
   <a href="#license">License</a>
 </p>
 
-## Description
+## About
 
-An npm module to automate the regular processing and caching of responses from APIs. With a caching mechanism inspired by [node-cache](https://www.npmjs.com/package/node-cache), this module has all the standard interface methods to interact with the in-memory cache.<br>
+An <a href="https://www.npmjs.com/">npm</a> module to automate the regular processing and caching of responses from APIs. With a caching mechanism inspired by [node-cache](https://www.npmjs.com/package/node-cache), this module has all the standard interface methods to interact with the in-memory cache.<br>
 Mastak makes requests using [node-fetch](https://www.npmjs.com/package/node-fetch) and processes the response based on the `resProcessor()` function provided by the user. Each key gets a `timeout(ttl)` and an `updateInterval`(if `autoUpdate` is _true_).
 
 ## Installation
@@ -69,7 +69,7 @@ const cache = new Mastak({
 ## Types
 
 There are 3 types/interfaces that a user has to take into account when using Mastak, i.e. `Request`, `CacheInput` & `CacheUnit`.<br>
-`Request` & `CacheInput` define the format of input that is expected from the user while `CacheUnit` defines the format in which an API and its value is stored with the cache.
+`Request` & `CacheInput` define the format of input that is expected from the user while `CacheUnit` defines the format in which an API and its value is stored within the cache.
 
 ### Request
 
