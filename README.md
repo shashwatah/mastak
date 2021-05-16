@@ -24,6 +24,7 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a> for <a href=
   <a href="#description">Description</a> •
   <a href="#installation">Installation</a> •
   <a href="#initialization">Initialization</a> •
+  <a href="#types">Types</a> •
   <a href="#usage">Usage</a> •
   <a href="#contribution">Contribution</a> •
   <a href="#authors">Authors</a> •
@@ -51,7 +52,7 @@ const cache = new Mastak();
 
 - `stdTTL`: *(default: `0`)* - the standard timeout(in seconds) for each element of the cache, `0` = infinite.
 - `autoUpdate`: *(default: `true`)* - boolean flag that states if each element in the cache has to be regularly updated or not.
-- `updateInterval`: *(default: `3600(1 hr in secs)`* - the standard interval(in seconds) at  which each element in the cache has to be updated
+- `updateInterval`: *(default: `3600(1 hr in secs)`* - the standard interval(in seconds) at  which each element in the cache has to be updated.
 - `checkPeriod`: *(default: `600(10 min in secs)`* - the regular interval(in seconds) at which the internal *checkData()* method will check each element for timeout and autoUpdate.
 
 #### Example
@@ -66,7 +67,8 @@ const cache = new Mastak({
 
 ## Types
 
-There are 2 types/interfaces that a user has to take into account when using Mastak, i.e. `Request` & `CacheInput`. These interfaces define the format of input that is expected from the user.
+There are 3 types/interfaces that a user has to take into account when using Mastak, i.e. `Request`, `CacheInput` & `CacheUnit`.<br>
+`Request` & `CacheInput` define the format of input that is expected from the user while `CacheUnit` defines the format in which an API and its value is stored with the cache.
 
 ### Request
 
@@ -85,8 +87,6 @@ interface Request {
 }
 ```
 
-> ? - parameter is not required.
-
 ### CacheInput 
 
 `CacheInput` defines all the data that needs to be input to set or update an API.
@@ -100,7 +100,19 @@ interface CacheInput {
 }
 ```
 
-> ? -  parameter is not required. 
+### CacheUnit
+
+`CacheUnit` defines the format in which an API is stored in the cache. It extends `CacheInput` i.e. it inherits all its properties.
+
+```ts
+interface CacheUnit extends CacheInput{
+    setTime: number; // the time at which this API/CacheUnit was set
+    lastUpdate: number; // the time at which the value was last updated
+    value: any; // the processed response from the API
+}
+```
+
+> ? -  field is not required. 
 
 Take a look at [src/types/main.interfaces.ts](https://github.com/Araekiel/mastak/blob/master/src/types/main.interfaces.ts) to see all the defined interfaces.
 
