@@ -2,8 +2,8 @@
   "name": "mastak",
   "version": "1.0.0",
   "description": "An npm module for in-memory automated API caching.",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/main.js",
+  "types": "lib/main.d.ts",
   "scripts": {
     "build": "tsc -p ."
   },
