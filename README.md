@@ -33,7 +33,7 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a> for <a href=
 ## Description
 
 An npm module to automate the regular processing and caching of responses from APIs. With a caching mechanism inspired by [node-cache](https://www.npmjs.com/package/node-cache), this module has all the standard interface methods to interact with the in-memory cache.<br>
-Mastak makes requests using [node-fetch](https://www.npmjs.com/package/node-fetch) and processes the response based on the `resProcessor()` function provided by the user. Each key gets a `timeout(ttl)` and an `updateInterval`(if `autoUpdate` is true). 
+Mastak makes requests using [node-fetch](https://www.npmjs.com/package/node-fetch) and processes the response based on the `resProcessor()` function provided by the user. Each key gets a `timeout(ttl)` and an `updateInterval`(if `autoUpdate` is *true*). 
 
 ## Installation
 
@@ -146,7 +146,7 @@ const foo = async () => {
 foo();
 ```
 
-#### Response 
+#### Output 
 
 ```js
 set() { setTime: 1621113414640,
@@ -180,7 +180,7 @@ try {
 }  
 ```
 
-#### Response 
+#### Output 
 
 ```js
 get() { title: 'foo', body: 'bar', userId: 1, id: 101 }
@@ -230,7 +230,7 @@ const foo = async () => {
 foo();
 ```
 
-#### Response
+#### Output
 
 ```js
 update() { setTime: 1621113648549,
@@ -265,7 +265,7 @@ try {
 }   
 ```
 
-#### Response 
+#### Output 
 
 ```js
 delete() true
@@ -332,7 +332,7 @@ const foo = async () => {
 foo();
 ```
 
-#### Response 
+#### Output 
 
 ```js
 setMulti() [ { setTime: 1621113734595,
@@ -375,7 +375,7 @@ try {
 } 
 ```
 
-#### Response 
+#### Output 
 
 ```js
 getMulti() { JSONPlaceholder: { title: 'foo', body: 'bar', userId: 1, id: 101 },
@@ -395,10 +395,11 @@ Mastak.has(key: string)
 #### Example
 
 ```js
-cache.has("JSONPlaceholder");
+let response = cache.has("JSONPlaceholder");
+console.log("has()", response)
 ```
 
-#### Response 
+#### Output 
 
 ```js
 has() true
@@ -418,10 +419,11 @@ Mastak.keys()
 #### Example
 
 ```js
-cache.keys();
+let response = cache.keys();
+console.log("keys()", response)
 ```
 
-### Response 
+#### Output 
 
 ```js
 keys() ["JSONPlaceholder", "JSONPlaceholder2"]
@@ -449,7 +451,7 @@ try {
 } 
 ```
 
-#### Response
+#### Output
 
 ```js
 deleteMulti() true
@@ -477,7 +479,7 @@ try {
 } 
 ```
 
-#### Response
+#### Output
 
 ```js
 take() { setTime: 1621113915875,
@@ -504,10 +506,11 @@ Mastak.flush()
 #### Example 
 
 ```js
-cache.flush();
+let response = cache.flush();
+console.log("flush()", response)
 ```
 
-#### Response 
+#### Output 
 
 ```js
 flush() true
