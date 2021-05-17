@@ -11,7 +11,7 @@ import {
   Cache,
 } from "./types/main.interfaces";
 
-class Mastak {
+module.exports = class Mastak {
   private cache: Cache;
   private options: OptionsInternal;
 
@@ -355,5 +355,3 @@ class Mastak {
     return error;
   }
 }
-
-export = Mastak;
