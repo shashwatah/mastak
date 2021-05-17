@@ -255,7 +255,7 @@ class Mastak {
             }; timeNow: ${now}'`
           );
           delete this.cache[key];
-          console.log(`Key '${key}'`);
+          console.log(`Key '${key}' deleted.`);
           continue;
         }
       }
