@@ -49,6 +49,8 @@ const Mastak = require("mastak");
 const cache = new Mastak();
 ```
 
+> To import the module in TypeScript, _esModuleInterop_ needs to be set to true in your _tsconfig.json_.
+
 ### Options
 
 - `stdTTL`: _(default: `0`)_ - the standard timeout(in seconds) for each element of the cache, `0` = infinite.
