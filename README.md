@@ -222,7 +222,7 @@ const request2 = {
   },
 };
 
-const resProcessor2 = (data: any) => {
+const resProcessor2 = (data) => {
   return data.userId;
 };
 
@@ -319,7 +319,7 @@ const request2 = {
   },
 };
 
-const resProcessor2 = (data: any) => {
+const resProcessor2 = (data) => {
   return data.userId;
 };
 
