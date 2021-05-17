@@ -1,7 +1,17 @@
 {
   "name": "mastak",
-  "version": "1.0.1",
-  "keywords": ["api", "typescript", "cache", "in-memory", "request", "cache-storage", "automated", "in-memory-storage", "in-memory-caching"],
+  "version": "1.0.2",
+  "keywords": [
+    "api",
+    "typescript",
+    "cache",
+    "in-memory",
+    "request",
+    "cache-storage",
+    "automated",
+    "in-memory-storage",
+    "in-memory-caching"
+  ],
   "description": "An npm module for in-memory automated API caching.",
   "main": "lib/main.js",
   "types": "lib/main.d.ts",
