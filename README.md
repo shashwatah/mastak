@@ -143,7 +143,7 @@ const request = {
   },
 };
 
-const api: CacheInput = {
+const api = {
   request: request,
   ttl: 1800,
 };
@@ -204,7 +204,7 @@ get() { title: 'foo', body: 'bar', userId: 1, id: 101 }
 
 ### update()
 
-Update the data of a `CacheUnit` and updated its value if needed.<br>
+Update the data of a `CacheUnit` and update its value if `updateNow` argument is _true_.<br>
 Returns a promise that resolves with the updated `CacheUnit` or rejects an error.
 
 ```js
