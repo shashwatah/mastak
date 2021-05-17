@@ -14,7 +14,7 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a>.
 
 <p align="center">
   <a><img alt="MIT License" src="https://img.shields.io/apm/l/atomic-design-ui.svg?"></a>
-  <a><img alt="Github Release" src="https://img.shields.io/badge/release-v1.0.3-blue"></a>
+  <a><img alt="Github Release" src="https://img.shields.io/badge/release-v1.0.1-1-blue"></a>
   <a href="http://makeapullrequest.com">
     <img alt="PRs Welcome"src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat">
   </a>
