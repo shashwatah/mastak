@@ -1,18 +1,10 @@
-<br>
-
-<div align="center">
-  <a href="#"><img align="center" src="https://github.com/Araekiel/mastak/blob/master/assets/logo/mastak.png" alt="Mastak" width="200"></a>
-</div>
-
-<br>
-
-<div align="center">
-  
-  <p><sub style="font-size: 24px; font-weight: bold;">मस्तक</sub> <sub style="font-size: 10px">mastak</sub></p>
-  
-</div>
- 
-<br>
+<h1 align="center">
+  <br>
+  <a href="#"><img src="https://github.com/Araekiel/mastak/blob/master/assets/logo/mastak.png" alt="Mastak" width="200"></a>
+  <br>
+  मस्तक <sub>mastak</sub>   
+  <br>
+</h1>
 
 <h4 align="center">
 An <a href="https://www.npmjs.com/">npm</a> module for in-memory automated API caching.
