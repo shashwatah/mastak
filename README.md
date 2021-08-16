@@ -2,7 +2,7 @@
   <br>
   <a href="#"><img src="https://github.com/Araekiel/mastak/blob/master/assets/logo/mastak.png" alt="Mastak" width="200"></a>
   <br>
-  Mastak    
+  मस्तक<span style="font-size:10px;">mastak</span>   
   <br>
 </h1>
 
