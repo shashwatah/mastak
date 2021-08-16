@@ -8,7 +8,7 @@
 
 <div align="center">
   
-  <p><span style="font-size: 24px; font-weight: bold;">मस्तक</span> <span style="font-size: 10px">mastak</span></p>
+  <p><sub style="font-size: 24px; font-weight: bold;">मस्तक</sub> <sub style="font-size: 10px">mastak</sub></p>
   
 </div>
  
