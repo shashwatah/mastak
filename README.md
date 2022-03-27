@@ -547,5 +547,5 @@ flush() true
 
 ## License
 
-[MIT License](https://github.com/araekiel/mastak/blob/master/LICENSE) | Copyright (c) 2022 Kumar Shashwat
+[MIT License](https://github.com/araekiel/mastak/blob/main/LICENSE) | Copyright (c) 2022 Kumar Shashwat
 
