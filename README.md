@@ -15,9 +15,6 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a>.
 <p align="center">
   <a><img alt="MIT License" src="https://img.shields.io/apm/l/atomic-design-ui.svg?"></a>
   <a><img alt="Github Release" src="https://img.shields.io/badge/release-v1.1.4-blue"></a>
-  <a href="http://makeapullrequest.com">
-    <img alt="PRs Welcome"src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat">
-  </a>
 </p>
 
 <p align="center">
@@ -26,7 +23,6 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a>.
   <a href="#initialization">Initialization</a> •
   <a href="#types">Types</a> •
   <a href="#usage">Usage</a> •
-  <a href="#contribution">Contribution</a> •
   <a href="#authors">Authors</a> •
   <a href="#license">License</a>
 </p>
@@ -117,7 +113,7 @@ interface CacheUnit extends CacheInput {
 
 > ? - field is not required.
 
-Take a look at [src/types/main.interfaces.ts](https://github.com/Araekiel/mastak/blob/master/src/types/main.interfaces.ts) to see all the defined interfaces.
+Take a look at [src/types/main.interfaces.ts](https://github.com/araekiel/mastak/blob/master/src/types/main.interfaces.ts) to see all the defined interfaces.
 
 ## Usage
 
@@ -545,16 +541,11 @@ flush() true
 
 <hr>
 
-## Contribution
-
-Fork the repository and open a pull request to contribute.
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
 ## Authors
 
-- [Araekiel](https://www.github.com/Araekiel)
+- [araekiel](https://www.github.com/araekiel)
 
 ## License
 
-[MIT License](https://github.com/Araekiel/mastak/blob/master/LICENSE) | Copyright (c) 2021 Kumar Shashwat
+[MIT License](https://github.com/araekiel/mastak/blob/master/LICENSE) | Copyright (c) 2022 Kumar Shashwat
 
