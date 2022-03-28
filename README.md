@@ -1,7 +1,5 @@
 <h1 align="center">
   <br>
-  <a href="#"><img src="https://github.com/araekiel/mastak/blob/main/assets/logo/mastak.png" alt="Mastak" width="200"></a>
-  <br>
   Mastak
   <br>
 </h1>
