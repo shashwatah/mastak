@@ -5,7 +5,7 @@
 </h1>
 
 <h4 align="center">
-An <a href="https://www.npmjs.com/">npm</a> module for in-memory automated API caching.
+An <a href="https://www.npmjs.com/">npm</a> package for automated, in-memory API caching.
 <br/>
 Built with <a href="https://www.typescriptlang.org/">TypeScript</a>.
 </h4>
