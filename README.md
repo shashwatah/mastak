@@ -11,7 +11,7 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a>.
 </h4>
 
 <p align="center">
-  <a><img alt="MIT License" src="https://img.shields.io/apm/l/atomic-design-ui.svg?"></a>
+  <a href="LICENSE"><img alt="Release" src="https://img.shields.io/"></a>
   <a><img alt="Github Release" src="https://img.shields.io/badge/release-v1.1.4-blue"></a>
 </p>
 
