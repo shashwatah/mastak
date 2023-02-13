@@ -11,7 +11,7 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a>.
 </h4>
 
 <p align="center">
-  <a href="LICENSE"><img alt="Release" src="https://img.shields.io/"></a>
+  <a href="LICENSE"><img alt="Release" src="https://img.shields.io/badge/license-MIT-green"></a>
   <a><img alt="Github Release" src="https://img.shields.io/badge/release-v1.1.4-blue"></a>
 </p>
 
