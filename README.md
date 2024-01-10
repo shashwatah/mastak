@@ -1,8 +1,4 @@
-<h1 align="center">
-  <br>
-  Mastak
-  <br>
-</h1>
+<h1 align="center">Mastak</h1>
 
 <h4 align="center">
 An <a href="https://www.npmjs.com/">npm</a> package for automated, in-memory API caching.
@@ -12,7 +8,7 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a>.
 
 <p align="center">
   <a href="LICENSE"><img alt="Release" src="https://img.shields.io/badge/license-MIT-green"></a>
-  <a><img alt="Github Release" src="https://img.shields.io/badge/release-v1.1.4-blue"></a>
+  <a href="https://github.com/shashwatah/mastak/releases/tag/v1.1.4"><img alt="Github Release" src="https://img.shields.io/badge/release-v1.1.4-blue"></a>
 </p>
 
 <p align="center">
@@ -21,7 +17,6 @@ Built with <a href="https://www.typescriptlang.org/">TypeScript</a>.
   <a href="#initialization">Initialization</a> •
   <a href="#types">Types</a> •
   <a href="#usage">Usage</a> •
-  <a href="#authors">Authors</a> •
   <a href="#license">License</a>
 </p>
 
@@ -111,7 +106,7 @@ interface CacheUnit extends CacheInput {
 
 > ? - field is not required.
 
-Take a look at [src/types/main.interfaces.ts](https://github.com/araekiel/mastak/blob/master/src/types/main.interfaces.ts) to see all the defined interfaces.
+Take a look at [src/types/main.interfaces.ts](https://github.com/shashwatah/mastak/blob/master/src/types/main.interfaces.ts) to see all the defined interfaces.
 
 ## Usage
 
@@ -539,11 +534,7 @@ flush() true
 
 <hr>
 
-## Authors
-
-- [araekiel](https://www.github.com/araekiel)
-
 ## License
 
-[MIT License](https://github.com/araekiel/mastak/blob/main/LICENSE) | Copyright (c) 2022 Kumar Shashwat
+[MIT License](https://github.com/shashwatah/mastak/blob/main/LICENSE) | Copyright (c) 2024 Kumar Shashwat
 
